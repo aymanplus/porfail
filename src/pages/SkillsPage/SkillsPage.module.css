@@ -1,0 +1,91 @@
+/* src/pages/SkillsPage/SkillsPage.module.css */
+.skillsContainer {
+  padding: 6rem 1rem;
+  text-align: center;
+  /* **جديد:** إضافة منظور للتحريك ثلاثي الأبعاد */
+  perspective: 1500px;
+}
+
+.title {
+  font-size: 2.8rem;
+  margin-bottom: 4rem;
+}
+
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* زيادة الحد الأدنى للعرض */
+  gap: 2.5rem; /* زيادة المسافة */
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* --- **جديد:** إعادة تصميم البطاقة بالكامل --- */
+.skillCard {
+  background: linear-gradient(145deg, var(--bg-secondary), #11151c); /* تدرج لوني خفيف للخلفية */
+  border: 1px solid var(--border-color);
+  border-radius: 16px; /* حواف أكثر دائرية */
+  padding: 2.5rem 1rem;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden; /* مهم لإخفاء تأثير اللمعان الزائد */
+  
+  /* **جديد:** إعداد الانتقال للتأثيرات ثلاثية الأبعاد */
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* **جديد:** التأثير ثلاثي الأبعاد عند مرور الماوس */
+.skillCard:hover {
+  transform: rotateY(15deg) rotateX(10deg) scale(1.05);
+  border-color: var(--accent-color-1);
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3);
+}
+
+/* **جديد:** تأثير اللمعان (Shine Effect) */
+.skillCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%; /* يبدأ من خارج البطاقة */
+  width: 75%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: skewX(-25deg);
+  transition: left 0.7s ease-in-out;
+}
+
+/* **جديد:** تحريك اللمعان عند مرور الماوس */
+.skillCard:hover::before {
+  left: 150%;
+}
+
+/* **جديد:** إعداد الأيقونة للتحريك ثلاثي الأبعاد */
+.skillIcon {
+  font-size: 4.5rem; /* تكبير الأيقونة قليلاً */
+  margin-bottom: 1.5rem;
+  color: var(--text-primary); /* تغيير اللون الأساسي ليكون أهدأ */
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transition: all 0.4s ease;
+  transform: translateZ(0); /* تمهيد للتحريك */
+}
+
+/* **جديد:** تحريك الأيقونة وجعلها ملونة عند مرور الماوس */
+.skillCard:hover .skillIcon {
+  color: var(--accent-color-1);
+  text-shadow: 0 0 20px var(--accent-color-1);
+  transform: translateZ(50px); /* جعل الأيقونة "تقفز" للأمام */
+}
+
+.skillName {
+  font-size: 1.2rem;
+  font-weight: 600;
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+  transition: transform 0.4s ease;
+  transform: translateZ(0); /* تمهيد للتحريك */
+}
+
+/* **جديد:** تحريك اسم المهارة للأمام قليلاً */
+.skillCard:hover .skillName {
+  transform: translateZ(30px);
+}

@@ -1,0 +1,192 @@
+/* src/pages/HomePage/HomePage.css */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+  text-align: center;
+  padding: 4rem 1rem;
+  position: relative;
+  overflow-x: hidden; /* منع التمرير الأفقي */
+}
+
+/* تأثير النجوم في الخلفية (يبقى كما هو) */
+.home-container::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background-image: radial-gradient(circle at center, var(--accent-color-1) 1px, transparent 1px),
+                    radial-gradient(circle at center, var(--accent-color-2) 1px, transparent 1px);
+  background-size: 40px 40px, 80px 80px;
+  opacity: 0.1;
+  animation: background-pan 30s linear infinite;
+}
+
+@keyframes background-pan {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 100% 100%, 50% 50%; }
+}
+
+.hero-section {
+  z-index: 1;
+  width: 100%; /* ضمان أخذ العرض الكامل */
+  max-width: 1100px; /* تحديد أقصى عرض للمحتوى */
+}
+
+.hero-title {
+  font-size: 4.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  transition: font-size 0.3s ease; /* إضافة انتقال ناعم لحجم الخط */
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  max-width: 700px;
+  margin: 0 auto 3rem auto;
+  line-height: 1.8;
+  transition: font-size 0.3s ease, margin-bottom 0.3s ease;
+}
+
+.hero-services {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3.5rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.service-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: rgba(22, 27, 34, 0.5);
+  padding: 1.25rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.service-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  border-color: var(--accent-color-1);
+}
+
+.service-icon {
+  font-size: 1.8rem;
+}
+
+.service-icon.react { color: #61DAFB; }
+.service-icon.flutter { color: #027DFD; }
+.service-icon.backend { color: #F7DF1E; }
+.service-icon.design { color: #A259FF; }
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-family: var(--font-heading);
+  padding: 16px 36px;
+  text-decoration: none;
+  border-radius: 12px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: 2px solid transparent;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+  color: white;
+  background: var(--accent-gradient);
+  background-size: 200% auto;
+}
+
+.btn-primary:hover {
+  background-position: right center;
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(138, 43, 226, 0.3); 
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-4px) scale(1.02);
+  background-color: var(--bg-secondary);
+  border-color: var(--accent-color-1);
+  box-shadow: 0 8px 25px rgba(30, 144, 255, 0.15);
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+/* --- **جديد:** قسم التجاوبية للشاشات الصغيرة --- */
+@media (max-width: 768px) {
+  .home-container {
+    padding: 3rem 1.5rem; /* تقليل المساحة العمودية وزيادة الأفقية قليلاً */
+  }
+
+  .hero-title {
+    font-size: 2.8rem; /* تصغير حجم العنوان الرئيسي بشكل كبير */
+    line-height: 1.2;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem; /* تصغير حجم العنوان الفرعي */
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-services {
+    grid-template-columns: 1fr; /* جعل كل خدمة تأخذ سطراً كاملاً */
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  
+  /* لا حاجة لتغيير service-item لأن الشبكة أصبحت عمودية */
+
+  .hero-buttons {
+    flex-direction: column; /* جعل الأزرار تحت بعضها */
+    align-items: center;    /* **تعديل:** لتوسيط الأزرار داخل الحاوية */
+    width: 100%;            /* اجعل الحاوية تأخذ العرض المتاح بالكامل */
+    gap: 1rem;              /* تقليل المسافة بين الأزرار */
+    /* **تم الحذف:** لم نعد بحاجة لـ max-width أو margin هنا */
+  }
+
+  .btn {
+    width: 100%;            /* **مهم:** اجعل الزر يملأ الحاوية */
+    max-width: 350px;       /* **مهم:** لكن لا يتجاوز هذا العرض أبداً */
+    font-size: 1rem;
+    padding: 16px 24px;
+    box-sizing: border-box; /* ضمان عدم تجاوز الحجم بسبب الـ padding */
+  }
+}

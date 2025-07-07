@@ -1,0 +1,219 @@
+/* src/pages/ProjectsPage/ProjectsPage.css */
+
+.projects-container {
+  padding: 6rem 2rem;
+  text-align: center;
+  min-height: 90vh;
+}
+
+.projects-title {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.projects-subtitle {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto 4rem auto;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.project-card {
+  background: rgba(22, 27, 34, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), 
+              box-shadow 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 16px;
+  border: 2px solid transparent;
+  background: var(--accent-gradient) border-box;
+  
+  /* --- منطقة التحديث --- */
+  -webkit-mask: 
+     linear-gradient(#fff 0 0) padding-box, 
+     linear-gradient(#fff 0 0);
+  /* **جديد:** إضافة النسخة القياسية */
+  mask: 
+     linear-gradient(#fff 0 0) padding-box, 
+     linear-gradient(#fff 0 0);
+  /* --- نهاية منطقة التحديث --- */
+
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+}
+
+/* ... بقية الملف يبقى كما هو ... */
+.project-card:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+.project-image-container {
+  height: 220px;
+  overflow: hidden;
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease-in-out, filter 0.4s ease;
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.1);
+  filter: brightness(1.1);
+}
+
+.project-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  text-align: right;
+}
+
+.project-title {
+  font-size: 1.7rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.project-description {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  flex-grow: 1;
+  margin-bottom: 1.5rem;
+}
+
+.project-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  border-top: 1px solid var(--border-color);
+  padding-top: 1rem;
+}
+
+.tech-stack {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.tech-icon-tooltip {
+  position: relative;
+  font-size: 1.8rem;
+  color: var(--text-secondary);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.tech-icon-tooltip:hover {
+  color: var(--accent-color-1);
+  transform: scale(1.1);
+}
+
+.tech-icon-tooltip .tooltip-text {
+  visibility: hidden;
+  width: max-content;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 10px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 0.9rem;
+}
+
+.tech-icon-tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.project-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 8px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.project-link:hover {
+  background-color: var(--accent-color-1);
+  border-color: var(--accent-color-1);
+  color: white;
+}
+
+
+/* جديد: لجعل البطاقة كلها رابط بدون خط سفلي */
+.project-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block; /* لجعل الرابط يأخذ حجم البطاقة */
+}
+
+/* جديد: تغيير شكل الزر السابق ليناسب السياق الجديد */
+.project-link-imitation {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 8px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.project-card:hover .project-link-imitation {
+  background-color: var(--accent-color-1);
+  border-color: var(--accent-color-1);
+  color: white;
+}
+
+/* حذف رابط GitHub من هنا، سنضعه في صفحة التفاصيل */
+.project-footer {
+  /* حذف justify-content: space-between */
+  justify-content: flex-start; /* أو center حسب التصميم */
+  gap: 2rem; /* مسافة بين التقنيات والزر */
+}

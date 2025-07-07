@@ -1,0 +1,100 @@
+/* src/pages/AboutPage/AboutPage.module.css */
+.aboutContainer {
+  padding: 6rem 1rem;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: 2.8rem;
+  margin-bottom: 4rem;
+  color: var(--text-primary);
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  max-width: 1000px;
+}
+
+.textSection {
+  flex: 1.5;
+}
+
+.textSection h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.textSection p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.imageSection {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.profileImage {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid var(--border-color);
+  padding: 5px;
+  z-index: 1;
+}
+
+/* تأثير حلقة التدرج حول الصورة */
+.imageSection::before {
+  content: '';
+  position: absolute;
+  width: 318px;
+  height: 318px;
+  border-radius: 50%;
+  background: var(--accent-gradient);
+  animation: spin 4s linear infinite;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.cvButton {
+  display: inline-block;
+  font-family: var(--font-heading);
+  padding: 14px 32px;
+  background: var(--accent-gradient);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cvButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column-reverse;
+  }
+}

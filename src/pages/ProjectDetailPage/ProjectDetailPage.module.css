@@ -1,0 +1,291 @@
+/* src/pages/ProjectDetailPage/ProjectDetailPage.module.css */
+
+.projectDetailContainer {
+  padding: 0;
+  padding-bottom: 4rem;
+  max-width: 100%;
+}
+
+.projectHeader {
+  position: relative;
+  width: 100%;
+  height: 40vh;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.headerImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(8px) brightness(0.5);
+  -webkit-filter: blur(8px) brightness(0.5);
+}
+
+.headerOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, var(--bg-primary) 5%, transparent 100%);
+}
+
+.headerContent {
+  position: relative;
+  z-index: 2;
+  color: var(--text-primary);
+  padding: 1rem;
+}
+
+.backLink {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  text-decoration: none;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 8px 16px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.backLink:hover {
+  color: var(--text-primary);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.projectTitle {
+  font-size: 3.5rem;
+  font-weight: 700;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.projectNav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+  margin-bottom: 3rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.projectNavLink {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: 8px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.projectNavLink::after {
+  content: '';
+  position: absolute;
+  bottom: -1rem; /* Aligns with the border-bottom of the parent */
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--accent-gradient);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.projectNavLink.active,
+.projectNavLink:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-secondary);
+}
+
+.projectNavLink.active::after {
+  transform: scaleX(1);
+}
+
+.projectContent {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Overview & Features Styles */
+.overviewContainer h2, .textContent h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.featureCard {
+  background: var(--bg-secondary);
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.featureCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.featureIcon {
+  font-size: 3rem;
+  color: var(--accent-color-1);
+  margin-bottom: 1rem;
+}
+
+.featureTitle {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.featureDescription {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 4rem;
+  flex-wrap: wrap;
+}
+
+.actionButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 14px 28px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.playStore {
+  background-color: #00D37F;
+  color: white;
+}
+.playStore:hover {
+  background-color: #00b86f;
+  transform: translateY(-3px);
+}
+
+.github {
+  background-color: #333;
+  color: white;
+}
+.github:hover {
+  background-color: #444;
+  transform: translateY(-3px);
+}
+
+/* Privacy & Changelog Text Styles */
+.textContent {
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+.textContent h3 {
+  color: var(--text-primary);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+.textContent ul {
+  padding-right: 20px;
+}
+.textContent li {
+  margin-bottom: 0.5rem;
+}
+
+/* Changelog Timeline */
+.changelogContainer {
+  position: relative;
+  padding-right: 30px;
+}
+.changelogContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 8px;
+  height: 100%;
+  width: 2px;
+  background-color: var(--border-color);
+}
+.changelogEntry {
+  position: relative;
+  margin-bottom: 3rem;
+}
+.timelineIcon {
+  position: absolute;
+  top: 5px;
+  right: -12px;
+  width: 30px;
+  height: 30px;
+  background-color: var(--accent-color-2);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--bg-primary);
+}
+.changelogDate {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+.changelogVersion {
+  font-size: 1.6rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+.changelogChanges {
+  list-style-type: disc;
+  padding-right: 20px;
+}
+.changelogChanges li {
+  margin-bottom: 0.5rem;
+}
+
+/* Not Found Page */
+.notFound {
+  text-align: center;
+  padding: 5rem 1rem;
+}
+
+@media (max-width: 768px) {
+  .projectTitle {
+    font-size: 2.5rem;
+  }
+  .backLink {
+    top: 1rem;
+    right: 1rem;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+}

@@ -1,0 +1,2350 @@
+React/CSS Code Extraction - 2025-07-01 15:16:47
+========================================
+
+--- START OF FILE App.css ---
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+
+--- END OF FILE ---
+==================================================
+
+--- START OF FILE App.jsx ---
+
+// src/App.jsx
+
+// 1. استيراد المكتبات والمكونات الأساسية
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Navbar from './components/Navbar/Navbar';
+
+// 2. استيراد جميع مكونات الصفحات
+import HomePage from './pages/HomePage/HomePage';
+import AboutPage from './pages/AboutPage/AboutPage';
+import ProjectsPage from './pages/ProjectsPage/ProjectsPage';
+import ContactPage from './pages/ContactPage/ContactPage';
+import SkillsPage from './pages/SkillsPage/SkillsPage';
+import ProjectDetailPage from './pages/ProjectDetailPage/ProjectDetailPage';
+
+// 3. استيراد المكونات الفرعية (المتداخلة) لصفحة تفاصيل المشروع
+import ProjectOverview from './pages/ProjectDetailPage/ProjectOverview';
+import ProjectPrivacyPolicy from './pages/ProjectDetailPage/ProjectPrivacyPolicy';
+import ProjectChangelog from './pages/ProjectDetailPage/ProjectChangelog';
+
+// 4. (مقترح) إنشاء مكون بسيط لصفحة "غير موجود" للتعامل مع الروابط الخاطئة
+// هذا المكون سيظهر إذا حاول المستخدم الوصول إلى رابط غير معرف في المسارات أدناه
+const NotFoundPage = () => (
+  <div style={{
+    textAlign: 'center',
+    padding: '5rem 2rem',
+    minHeight: '70vh',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }}>
+    <h1 style={{ fontSize: 'clamp(3rem, 15vw, 6rem)', margin: 0 }}>404</h1>
+    <h2 style={{ fontSize: '1.5rem', color: 'var(--text-secondary)', marginBottom: '2rem' }}>الصفحة غير موجودة</h2>
+    <p style={{ maxWidth: '450px', marginBottom: '2.5rem', lineHeight: 1.7 }}>
+      عفواً، لم نتمكن من العثور على الصفحة التي تبحث عنها. قد تكون قد حُذفت أو تم تغيير الرابط.
+    </p>
+    <Link to="/" style={{
+      display: 'inline-block',
+      background: 'var(--accent-gradient)',
+      color: 'white',
+      padding: '14px 32px',
+      borderRadius: '8px',
+      textDecoration: 'none',
+      fontWeight: 'bold',
+      transition: 'transform 0.2s ease'
+    }}>
+      العودة إلى الصفحة الرئيسية
+    </Link>
+  </div>
+);
+
+
+// 5. المكون الرئيسي للتطبيق الذي يجمع كل شيء
+function App() {
+  return (
+    <Router>
+      {/* شريط التنقل يظهر في جميع الصفحات */}
+      <Navbar />
+      
+      {/* حاوية المسارات التي تبدل بين الصفحات حسب الرابط الحالي */}
+      <Routes>
+        {/* المسارات الأساسية للتطبيق */}
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/skills" element={<SkillsPage />} />
+        <Route path="/projects" element={<ProjectsPage />} />
+        
+        {/* المسار الديناميكي والمتداخل لصفحات المشاريع */}
+        {/* هذا المسار يعرض تفاصيل المشروع بناءً على الـ ID في الرابط (مثال: /projects/my-project-id) */}
+        <Route path="/projects/:projectId" element={<ProjectDetailPage />}>
+          {/* هذه هي الصفحات الفرعية داخل صفحة المشروع */}
+          <Route index element={<ProjectOverview />} /> {/* الصفحة الافتراضية (نظرة عامة) */}
+          <Route path="privacy" element={<ProjectPrivacyPolicy />} /> {/* صفحة سياسة الخصوصية */}
+          <Route path="changelog" element={<ProjectChangelog />} /> {/* صفحة سجل التحديثات */}
+        </Route>
+        
+        <Route path="/contact" element={<ContactPage />} />
+
+        {/* (مهم جداً) مسار شامل للتعامل مع أي رابط غير موجود (صفحة 404) */}
+        {/* يجب أن يكون هذا المسار هو الأخير دائماً في قائمة <Routes> */}
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </Router>
+  );
+}
+
+export default App;
+
+--- END OF FILE ---
+==================================================
+
+--- START OF FILE index.css ---
+
+/* src/index.css */
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
+
+:root {
+  /* ... نفس المتغيرات السابقة ... */
+  --bg-primary: #0D1117;
+  --bg-secondary: #161B22;
+  --border-color: #30363d;
+  --text-primary: #c9d1d9;
+  --text-secondary: #8b949e;
+  --accent-gradient: linear-gradient(90deg, #1E90FF, #8A2BE2);
+  --accent-color-1: #1E90FF;
+  --accent-color-2: #8A2BE2;
+  --font-heading: 'Tajawal', sans-serif;
+  --font-body: 'Tajawal', sans-serif;
+}
+
+body {
+  direction: rtl; /* <<<<<<< ----- هذا هو السطر الأهم ----- <<<<<<< */
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  line-height: 1.7;
+  font-weight: 400;
+  color-scheme: dark;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ... بقية الأنماط تبقى كما هي ... */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+h1 { font-size: 3rem; }
+h2 { font-size: 2.2rem; }
+h3 { font-size: 1.7rem; }
+p {
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+a {
+  color: var(--accent-color-1);
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+  color: var(--accent-color-2);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+--- END OF FILE ---
+==================================================
+
+--- START OF FILE main.jsx ---
+
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.jsx'
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
+
+
+--- END OF FILE ---
+==================================================
+
+--- START OF FILE components\Button\Button.jsx ---
+
+// src/components/Button/Button.jsx
+import React from 'react';
+import PropTypes from 'prop-types';
+import styles from './Button.module.css';
+
+/**
+ * مكون زر قابل لإعادة الاستخدام مع أشكال مختلفة.
+ *
+ * @param {object} props - الخصائص.
+ * @param {React.ReactNode} props.children - المحتوى داخل الزر (نص أو أيقونة).
+ * @param {function} props.onClick - الدالة التي ستُنفذ عند النقر على الزر.
+ * @param {string} [props.type='button'] - نوع الزر (button, submit, reset).
+ * @param {string} [props.variant='primary'] - شكل الزر ('primary' أو 'secondary').
+ * @param {string} [props.className=''] - كلاسات CSS إضافية لتخصيص النمط.
+ */
+const Button = ({ children, onClick, type = 'button', variant = 'primary', className = '' }) => {
+  // دمج الكلاسات: الكلاس الأساسي + كلاس الشكل + أي كلاس إضافي
+  const buttonClasses = `
+    ${styles.button} 
+    ${styles[variant]} 
+    ${className}
+  `.trim();
+
+  return (
+    <button
+      className={buttonClasses}
+      onClick={onClick}
+      type={type}
+    >
+      {children}
+    </button>
+  );
+};
+
+// تعريف أنواع الخصائص لضمان الاستخدام الصحيح للمكون
+Button.propTypes = {
+  children: PropTypes.node.isRequired,
+  onClick: PropTypes.func,
+  type: PropTypes.oneOf(['button', 'submit', 'reset']),
+  variant: PropTypes.oneOf(['primary', 'secondary']),
+  className: PropTypes.string,
+};
+
+export default Button;
+
+--- END OF FILE ---
+==================================================
+
+--- START OF FILE components\Button\Button.module.css ---
+
+/* src/components/Button/Button.module.css */
+
+/* --- الأنماط الأساسية المشتركة لكل الأزرار --- */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-family: var(--font-heading);
+  padding: 14px 32px;
+  text-decoration: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: 2px solid transparent;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* --- شكل الزر الأساسي (Primary) --- */
+.primary {
+  color: white;
+  background: var(--accent-gradient);
+  background-size: 200% auto; /* مهم لأنيميشن التدرج */
+}
+
+.primary:hover {
+  background-position: right center; /* تحريك التدرج عند المرور */
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(138, 43, 226, 0.3);
+}
+
+/* --- شكل الزر الثانوي (Secondary) --- */
+.secondary {
+  background-color: transparent;
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.secondary:hover {
+  transform: translateY(-4px) scale(1.02);
+  background-color: var(--bg-secondary);
+  border-color: var(--accent-color-1);
+  box-shadow: 0 8px 25px rgba(30, 144, 255, 0.15);
+}
+
+/* --- تأثير عند الضغط الفعلي على الزر --- */
+.button:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+--- END OF FILE ---
+==================================================
+
+--- START OF FILE components\Navbar\Navbar.css ---
+
+/* src/components/Navbar/Navbar.css (Final Version) */
+
+/* --- أنماط الشاشات الكبيرة (Desktop) --- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: rgba(13, 17, 23, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-color);
+  width: 100%; 
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  box-sizing: border-box;
+  height: 80px;
+}
+
+/* --- **تحديث:** تأثير اللمعان المتحرك على الشعار --- */
+.nav-logo {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  
+  /* إعداد الخلفية المتدرجة */
+  background: linear-gradient(
+    90deg, 
+    var(--text-secondary), 
+    var(--text-primary), 
+    var(--text-secondary)
+  );
+  background-size: 200% auto; /* جعل الخلفية أعرض من النص */
+  
+  /* قص الخلفية لتظهر فقط داخل حدود النص */
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  /* تطبيق الأنيميشن */
+  animation: shine-effect 8s linear infinite;
+}
+
+.nav-menu { 
+  display: flex; 
+  list-style: none; 
+  margin: 0; 
+  padding: 0; 
+  gap: 35px; 
+  align-items: center; 
+}
+
+.nav-link { 
+  font-family: var(--font-heading); 
+  font-weight: 500; 
+  color: var(--text-secondary); 
+  text-decoration: none; 
+  font-size: 1.1rem; 
+  padding: 8px 0; 
+  position: relative; 
+  transition: color 0.3s ease; 
+}
+
+.nav-link::after { 
+  content: ''; 
+  position: absolute; 
+  width: 0; 
+  height: 3px; 
+  bottom: -5px; 
+  left: 50%; 
+  transform: translateX(-50%); 
+  background: var(--accent-gradient); 
+  border-radius: 2px; 
+  transition: width 0.3s ease; 
+}
+
+.nav-link:hover, .nav-link.active { 
+  color: var(--text-primary); 
+}
+
+.nav-link:hover::after, .nav-link.active::after { 
+  width: 100%; 
+}
+
+.menu-icon { 
+  display: none; 
+}
+
+
+/* --- أنماط شاشات الجوال (Mobile) --- */
+@media screen and (max-width: 960px) {
+  .nav-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 2rem;
+    width: 100%;
+    height: calc(100vh - 80px);
+    position: absolute;
+    top: 80px;
+    
+    /* التعديل الرئيسي: إخفاء القائمة إلى اليمين بدل اليسار */
+    right: -100%;
+    left: auto; /* مهم لضمان عدم تداخل الخصائص */
+    
+    opacity: 1;
+    transition: all 0.5s ease;
+    background: var(--bg-primary);
+    padding-top: 3rem;
+  }
+
+  .nav-menu.active {
+    /* التعديل الرئيسي: إظهار القائمة من اليمين */
+    right: 0; 
+    opacity: 1;
+    transition: all 0.5s ease;
+    z-index: 1;
+  }
+
+  .nav-link { 
+    font-size: 1.5rem; 
+    text-align: center; 
+    width: 100%; 
+    display: table; 
+  }
+
+  .nav-link::after { 
+    display: none; 
+  }
+
+  .menu-icon { 
+    display: block; 
+    font-size: 1.8rem; 
+    cursor: pointer; 
+    color: var(--text-primary); 
+  }
+}
+
+/* --- الأنيميشن الخاص بتأثير اللمعان --- */
+@keyframes shine-effect {
+  /*
+    هذا الأنيميشن يحرك موضع الخلفية من اليسار إلى اليمين.
+    يمر اللمعان بسرعة (خلال أول 25% من مدة الأنيميشن) ثم ينتظر
+    بقية الوقت قبل أن يعيد نفسه، مما يجعله غير مزعج.
+  */
+  0% {
+    background-position: 200% center;
+  }
+  25% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
+}
+
+--- END OF FILE ---
+==================================================
+
+--- START OF FILE components\Navbar\Navbar.jsx ---
+
+// src/components/Navbar/Navbar.jsx
+import React, { useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import { FaBars, FaTimes } from 'react-icons/fa'; // استيراد أيقونات
+import './Navbar.css';
+
+const Navbar = () => {
+  // حالة لتتبع فتح/إغلاق القائمة
+  const [isOpen, setIsOpen] = useState(false);
+
+  // دالة لتبديل الحالة
+  const toggleMenu = () => setIsOpen(!isOpen);
+
+  // دالة لإغلاق القائمة عند الضغط على رابط (مهم لتجربة المستخدم في الجوال)
+  const closeMobileMenu = () => setIsOpen(false);
+
+  return (
+    <nav className="navbar">
+      <Link to="/" className="nav-logo" onClick={closeMobileMenu}>
+        ايمن خالد
+      </Link>
+
+      {/* أيقونة القائمة للجوال */}
+      <div className="menu-icon" onClick={toggleMenu}>
+        {isOpen ? <FaTimes /> : <FaBars />}
+      </div>
+
+      {/* قائمة الروابط - نضيف لها كلاس active عند الفتح */}
+      <ul className={isOpen ? 'nav-menu active' : 'nav-menu'}>
+        <li className="nav-item">
+          <NavLink to="/" className="nav-link" onClick={closeMobileMenu} end>
+            الرئيسية
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink to="/about" className="nav-link" onClick={closeMobileMenu}>
+            من أنا
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink to="/skills" className="nav-link" onClick={closeMobileMenu}>
+            مهاراتي
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink to="/projects" className="nav-link" onClick={closeMobileMenu}>
+            مشاريعي
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink to="/contact" className="nav-link" onClick={closeMobileMenu}>
+            تواصل معي
+          </NavLink>
+        </li>
+      </ul>
+    </nav>
+  );
+};
+
+export default Navbar;
+
+--- END OF FILE ---
+==================================================
+
+--- START OF FILE components\ProjectCard\ProjectCard.jsx ---
+
+// src/components/ProjectCard/ProjectCard.jsx
+import React from 'react';
+// (1) استيراد Link
+import { Link } from 'react-router-dom'; 
+import { FaGithub, FaReact, FaNodeJs, FaFly, FaDatabase } from 'react-icons/fa';
+import { SiDart, SiFlutter, SiGoogleads } from 'react-icons/si';
+
+const getTechIcon = (tech) => {
+  const lowerTech = tech.toLowerCase();
+  if (lowerTech.includes('flutter')) return <SiFlutter title="Flutter" />;
+  if (lowerTech.includes('dart')) return <SiDart title="Dart" />;
+  if (lowerTech.includes('react')) return <FaReact title="React" />;
+  if (lowerTech.includes('node')) return <FaNodeJs title="Node.js" />;
+  if (lowerTech.includes('sqflite')) return <FaDatabase title="SQFLite" />;
+  if (lowerTech.includes('provider')) return <FaFly title="Provider" />;
+  if (lowerTech.includes('google mobile ads')) return <SiGoogleads title="Google Mobile Ads" />;
+  return null;
+};
+
+// (2) تحديث الـ props
+function ProjectCard({ id, title, description, imageUrl, techStack }) {
+  return (
+    // (3) تحويل البطاقة إلى رابط
+    <Link to={`/projects/${id}`} className="project-card-link">
+      <div className="project-card">
+        <div className="project-image-container">
+          <img src={imageUrl} alt={title} className="project-image" />
+        </div>
+        <div className="project-content">
+          <h3 className="project-title">{title}</h3>
+          <p className="project-description">{description}</p>
+          
+          <div className="project-footer">
+            <div className="tech-stack">
+              {techStack.map(tech => (
+                <div key={tech} className="tech-icon-tooltip">
+                  {getTechIcon(tech)}
+                  <span className="tooltip-text">{tech}</span>
+                </div>
+              ))}
+            </div>
+            {/* (4) تغيير الزر ليظهر "عرض التفاصيل" */}
+            <div className="project-link-imitation">
+              <span>عرض التفاصيل</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+export default ProjectCard;
+
+--- END OF FILE ---
+==================================================
+
+--- START OF FILE data\projectsData.jsx ---
+
+// استيراد أيقونات Font Awesome (تم تجميعها من المسارات الصحيحة)
+import { FaCashRegister, FaChartLine, FaShieldAlt, FaSync, FaWhatsapp } from 'react-icons/fa';
+import { FaBoxesPacking, FaShareNodes } from "react-icons/fa6"; // <-- تم نقل FaShareNodes هنا
+
+// استيراد أيقونات Simple Icons
+import { SiFlutter } from 'react-icons/si';
+
+
+// استيراد صور المشاريع
+import salesMemoImage from '../assets/images/talabati.png'; 
+import debtBookImage from '../assets/images/dafter-diwn.png';
+
+export const projectsData = {
+  "sales-memo": {
+    id: "sales-memo",
+    title: "مذكرة مبيعات",
+    shortDescription: "تطبيق فلاتر متخصص لأصحاب المحلات والورش لإدارة طلبات العملاء بكفاءة، مع نظام مرن لإضافة أنواع مختلفة من المنتجات وتتبع الحالات المالية والتشغيلية.",
+    imageUrl: salesMemoImage,
+    googlePlayUrl: "https://play.google.com/store/apps/details?id=com.aymanpluss.talabati", // ضع رابط متجر جوجل هنا
+    githubLink: "https://github.com/aymanpluss/talabati",
+    techStack: ['Flutter', 'Dart', 'Provider', 'SQFLite', 'Google Mobile Ads'],
+    
+
+    
+    // محتوى الصفحة التفصيلية
+    features: [
+      {
+        icon: <FaCashRegister />,
+        title: "إدارة شاملة للطلبات",
+        description: "إضافة وتعديل الطلبات مع ربطها بالعملاء، وتحديد الأسعار والمبالغ المدفوعة والمتبقية.",
+      },
+      {
+        icon: <FaBoxesPacking />,
+        title: "أنواع منتجات متعددة",
+        description: "دعم إضافة منتجات عادية، طلبات عبر الإنترنت، وحتى منتجات معقدة مثل غرف النوم بتفاصيلها الدقيقة.",
+      },
+      {
+        icon: <FaSync />,
+        title: "تتبع حالات الطلب",
+        description: "متابعة كل طلب من كونه 'جديد' إلى 'قيد التنفيذ'، 'جاهز'، وأخيراً 'تم التسليم' لتنظيم سير العمل.",
+      },
+      {
+        icon: <FaShareNodes />,
+        title: "مشاركة ذكية",
+        description: "مشاركة تفاصيل الطلب مع المعمل أو العميل عبر واتساب، مع إعدادات قابلة للتخصيص لتحديد المعلومات المشتركة.",
+      },
+      {
+        icon: <FaChartLine />,
+        title: "إحصائيات وتقارير",
+        description: "عرض إحصائيات للمبيعات والمدفوعات والمبالغ المتبقية خلال فترات زمنية مختلفة (أسبوع، شهر، سنة).",
+      },
+      {
+        icon: <FaShieldAlt />,
+        title: "النسخ الاحتياطي والاستعادة",
+        description: "حماية بياناتك عن طريق إنشاء نسخ احتياطية محلية واستعادتها بسهولة لضمان عدم فقدان البيانات.",
+      }
+    ],
+
+    privacyPolicy: `
+      <h2>سياسة الخصوصية لتطبيق مذكرة مبيعات</h2>
+      <p>آخر تحديث: 29 يونيو 2025</p>
+      <p>نحن في "مذكرة مبيعات" نحترم خصوصيتك ونلتزم بحماية بياناتك. توضح هذه السياسة كيفية جمع واستخدام وتخزين معلوماتك.</p>
+      
+      <h3>1. البيانات التي نجمعها</h3>
+      <p>التطبيق يجمع ويخزن البيانات التي تدخلها بشكل مباشر، وتشمل:</p>
+      <ul>
+        <li><strong>بيانات العملاء:</strong> الاسم ورقم الهاتف (اختياري).</li>
+        <li><strong>بيانات الطلبات:</strong> تفاصيل المنتجات، الأسعار، المبالغ المدفوعة، الملاحظات، والصور المرفقة.</li>
+      </ul>
+      <p><strong>جميع هذه البيانات تُخزن محلياً على جهازك فقط.</strong></p>
+
+      <h3>2. استخدام الأذونات</h3>
+      <ul>
+        <li><strong>الوصول إلى التخزين/الصور:</strong> نطلب هذا الإذن لحفظ صور المنتجات والطلبات التي ترفقها، وكذلك لإنشاء واستعادة ملفات النسخ الاحتياطي على جهازك.</li>
+        <li><strong>الوصول إلى جهات الاتصال (اختياري):</strong> نطلب هذا الإذن لتسهيل عملية إضافة رقم هاتف العميل من قائمة جهات الاتصال الخاصة بك. لا نقوم بتخزين أو مشاركة قائمة جهات الاتصال.</li>
+      </ul>
+
+      <h3>3. مشاركة البيانات</h3>
+      <p>نحن لا نشارك أيًا من بياناتك الشخصية أو بيانات طلباتك مع أي طرف ثالث. ميزة "المشاركة" في التطبيق تتيح لك إرسال تفاصيل الطلب عبر تطبيقات أخرى (مثل واتساب) تحت سيطرتك الكاملة. يمكنك التحكم في المعلومات التي تتم مشاركتها من خلال شاشة "إعدادات المشاركة".</p>
+
+      <h3>4. أمان البيانات</h3>
+      <p>يتم تخزين قاعدة البيانات الخاصة بك بشكل آمن داخل مساحة التخزين الخاصة بالتطبيق على جهازك، ولا يمكن للتطبيقات الأخرى الوصول إليها. ملفات النسخ الاحتياطي يتم إنشاؤها بواسطتك وتكون مسؤوليتك حفظها في مكان آمن.</p>
+
+      <h3>5. التغييرات على السياسة</h3>
+      <p>قد نقوم بتحديث سياسة الخصوصية هذه من وقت لآخر. سيتم إعلامك بأي تغييرات عبر إشعار داخل التطبيق.</p>
+      
+      <p>إذا كانت لديك أي أسئلة، يرجى التواصل معنا.</p>
+    `,
+
+    changelog: [
+      {
+        version: "1.2.0",
+        date: "مايو 2025",
+        changes: [
+          "إضافة نوع منتج جديد: 'غرفة نوم' مع مكونات تفصيلية (دولاب، سرير، ...).",
+          "تحسين واجهة تفاصيل الطلب لعرض المنتجات المتعددة بشكل أفضل.",
+          "إضافة إعدادات مشاركة مفصلة لكل نوع منتج.",
+        ]
+      },
+      {
+        version: "1.1.0",
+        date: "مارس 2025",
+        changes: [
+          "إضافة شاشة الإحصائيات لعرض ملخص المبيعات والديون.",
+          "إضافة الوضع المظلم (Dark Mode) لواجهة التطبيق.",
+          "تحسين أداء تحميل قائمة الطلبات.",
+        ]
+      },
+      {
+        version: "1.0.0",
+        date: "يناير 2025",
+        changes: [
+          "الإصدار الأولي للتطبيق.",
+          "الميزات الأساسية: إضافة الطلبات، تتبع الحالات، إدارة العملاء.",
+          "دعم النسخ الاحتياطي والاستعادة المحلي.",
+        ]
+      }
+    ]
+  },
+  "dafter-diwn": {
+    id: "dafter-diwn",
+    title: "تطبيق دفتر ديون",
+    shortDescription: "تطبيق فلاتر متكامل لإدارة الديون الشخصية والتجارية، يعمل بشكل كامل بدون الحاجة للاتصال بالإنترنت.",
+    imageUrl: debtBookImage,
+    googlePlayUrl: null, // لا يوجد رابط بعد
+    githubLink: "https://github.com/aymanpluss/dafter-diwn",
+    techStack: ['Flutter', 'Dart', 'Provider', 'SQFLite'],
+    features: [], // أضف المميزات لاحقاً
+    privacyPolicy: "", // أضف السياسة لاحقاً
+    changelog: [], // أضف سجل التحديثات لاحقاً
+  },
+};
+
+--- END OF FILE ---
+==================================================
+
+--- START OF FILE pages\AboutPage\AboutPage.jsx ---
+
+// src/pages/AboutPage/AboutPage.jsx
+import React from 'react';
+import styles from './AboutPage.module.css';
+import myImage from '../../assets/images/aymanpluss.JPG';
+
+const AboutPage = () => {
+  return (
+    <div className={styles.aboutContainer}>
+      <h1 className={styles.title}>من أنا؟</h1>
+      <div className={styles.content}>
+        <div className={styles.textSection}>
+          {/* تم تغيير العنوان الفرعي هنا */}
+          <h2>مرحباً، أنا ايمن خالد</h2> 
+          <p>
+            مبرمج شغوف متخصص في تطوير التطبيقات، أجد متعة حقيقية في تحويل الأفكار إلى حلول برمجية عملية ومفيدة. بدأت رحلتي في عالم البرمجة من خلال حبي للتصميم وحل المشكلات، ومنذ ذلك الحين وأنا أتعلم وأطور من مهاراتي باستمرار.
+          </p>
+          <p>
+            أركز حالياً على تقنيات الويب الحديثة مثل React لبناء واجهات مستخدم تفاعلية وسريعة. هدفي هو بناء تطبيقات لا تكون فعالة فحسب، بل تقدم أيضاً تجربة استخدام ممتعة وسلسة.
+          </p>
+          <a href="/ayman-cv.pdf" download className={styles.cvButton}>
+            تحميل السيرة الذاتية
+          </a>
+        </div>
+        <div className={styles.imageSection}>
+          <img src={myImage} alt="صورة شخصية لـ ايمن خالد" className={styles.profileImage} />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AboutPage;
+
+--- END OF FILE ---
+==================================================
+
+--- START OF FILE pages\AboutPage\AboutPage.module.css ---
+
+/* src/pages/AboutPage/AboutPage.module.css */
+.aboutContainer {
+  padding: 6rem 1rem;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: 2.8rem;
+  margin-bottom: 4rem;
+  color: var(--text-primary);
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  max-width: 1000px;
+}
+
+.textSection {
+  flex: 1.5;
+}
+
+.textSection h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.textSection p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.imageSection {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.profileImage {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid var(--border-color);
+  padding: 5px;
+  z-index: 1;
+}
+
+/* تأثير حلقة التدرج حول الصورة */
+.imageSection::before {
+  content: '';
+  position: absolute;
+  width: 318px;
+  height: 318px;
+  border-radius: 50%;
+  background: var(--accent-gradient);
+  animation: spin 4s linear infinite;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.cvButton {
+  display: inline-block;
+  font-family: var(--font-heading);
+  padding: 14px 32px;
+  background: var(--accent-gradient);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cvButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column-reverse;
+  }
+}
+
+--- END OF FILE ---
+==================================================
+
+--- START OF FILE pages\ContactPage\ContactPage.jsx ---
+
+// src/pages/ContactPage/ContactPage.jsx
+import React from 'react';
+import styles from './ContactPage.module.css';
+// **جديد:** استيراد أيقونات إضافية
+import { FaGithub, FaLinkedin, FaUser, FaEnvelope, FaPaperPlane } from 'react-icons/fa'; 
+
+const ContactPage = () => {
+  return (
+    <div className={styles.contactContainer}>
+      <h1 className={styles.title}>لنتواصل معاً</h1>
+      <p className={styles.subtitle}>
+        هل لديك استفسار، فرصة عمل، أو ترغب فقط في قول مرحباً؟<br/>
+        لا تتردد في ملء النموذج أدناه أو التواصل عبر حساباتي.
+      </p>
+
+      <form
+        action="https://formspree.io/f/YOUR_UNIQUE_ID" // استبدل هذا برابطك من Formspree
+        method="POST"
+        className={styles.contactForm}
+      >
+        {/* **جديد:** إضافة حاوية لكل حقل مع أيقونته */}
+        <div className={styles.inputGroup}>
+          <input type="text" name="name" placeholder="الاسم الكامل" required />
+          <FaUser className={styles.icon} />
+        </div>
+        
+        <div className={styles.inputGroup}>
+          <input type="email" name="email" placeholder="البريد الإلكتروني" required />
+          <FaEnvelope className={styles.icon} />
+        </div>
+
+        <div className={styles.inputGroup}>
+          <textarea name="message" rows="7" placeholder="رسالتك..." required></textarea>
+        </div>
+
+        <button type="submit">
+          <FaPaperPlane />
+          إرسال الرسالة
+        </button>
+      </form>
+
+      <div className={styles.socialLinks}>
+        <p>أو تواصل مباشرة عبر:</p>
+        <div className={styles.socialIconsContainer}>
+          <a href="https://github.com/aymanpluss" target="_blank" rel="noopener noreferrer" title="GitHub">
+            <FaGithub />
+          </a>
+          <a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+            <FaLinkedin />
+          </a>
+          {/* أضف أيقونات أخرى هنا بنفس الطريقة */}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ContactPage;
+
+--- END OF FILE ---
+==================================================
+
+--- START OF FILE pages\ContactPage\ContactPage.module.css ---
+
+/* src/pages/ContactPage/ContactPage.module.css */
+
+.contactContainer {
+  padding: 6rem 1rem;
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+  min-height: 80vh;
+  position: relative; /* مهم للخلفية المتدرجة */
+}
+
+/* **جديد:** خلفية متدرجة ناعمة */
+.contactContainer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at 10% 20%, var(--accent-color-1, #1E90FF), transparent 40%),
+              radial-gradient(circle at 90% 80%, var(--accent-color-2, #8A2BE2), transparent 40%);
+  opacity: 0.1;
+  z-index: -1;
+  filter: blur(50px);
+}
+
+.title {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-bottom: 3.5rem; /* زيادة المسافة */
+  line-height: 1.7;
+}
+
+/* --- **جديد:** إعادة تصميم النموذج بالكامل --- */
+
+.contactForm {
+  background: rgba(22, 27, 34, 0.5); /* خلفية زجاجية */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 2.5rem;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  text-align: right;
+}
+
+/* **جديد:** حاوية لكل حقل مع أيقونته */
+.inputGroup {
+  position: relative;
+}
+
+.inputGroup .icon {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
+}
+
+/* ابحث عن هذه القاعدة في ملفك وقم بتحديثها */
+.contactForm input,
+.contactForm textarea {
+  width: 100%;
+  box-sizing: border-box; /* <<-- هذا هو السطر المهم الذي يحل المشكلة */
+  padding: 16px 50px 16px 16px; 
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-primary); 
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-family: var(--font-body);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* **جديد:** تأثير التركيز على الحقل والأيقونة */
+.contactForm input:focus,
+.contactForm textarea:focus {
+  outline: none;
+  border-color: var(--accent-color-1);
+  box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.2); /* توهج حول الحقل */
+}
+
+.contactForm input:focus + .icon,
+.contactForm textarea:focus + .icon {
+  color: var(--accent-color-1);
+}
+
+
+.contactForm button {
+  /* تم استخدام الأنماط من الصفحة الرئيسية لتناسق الأزرار */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 16px;
+  border: none;
+  border-radius: 10px;
+  background: var(--accent-gradient);
+  background-size: 200% auto;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  font-family: var(--font-heading);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.contactForm button:hover {
+  background-position: right center;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(138, 43, 226, 0.3);
+}
+
+.contactForm button:active {
+  transform: translateY(0) scale(0.97);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+/* --- **جديد:** تحسين قسم روابط التواصل الاجتماعي --- */
+.socialLinks {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.socialLinks p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+.socialIconsContainer {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.socialLinks a {
+  font-size: 2rem;
+  color: var(--text-secondary);
+  background-color: var(--bg-secondary);
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.socialLinks a:hover {
+  color: var(--text-primary);
+  border-color: var(--accent-color-1);
+  background-color: var(--accent-color-1);
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 8px 25px rgba(30, 144, 255, 0.2);
+}
+
+--- END OF FILE ---
+==================================================
+
+--- START OF FILE pages\HomePage\HomePage.css ---
+
+/* src/pages/HomePage/HomePage.css */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+  text-align: center;
+  padding: 4rem 1rem;
+  position: relative;
+  overflow-x: hidden; /* منع التمرير الأفقي */
+}
+
+/* تأثير النجوم في الخلفية (يبقى كما هو) */
+.home-container::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background-image: radial-gradient(circle at center, var(--accent-color-1) 1px, transparent 1px),
+                    radial-gradient(circle at center, var(--accent-color-2) 1px, transparent 1px);
+  background-size: 40px 40px, 80px 80px;
+  opacity: 0.1;
+  animation: background-pan 30s linear infinite;
+}
+
+@keyframes background-pan {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 100% 100%, 50% 50%; }
+}
+
+.hero-section {
+  z-index: 1;
+  width: 100%; /* ضمان أخذ العرض الكامل */
+  max-width: 1100px; /* تحديد أقصى عرض للمحتوى */
+}
+
+.hero-title {
+  font-size: 4.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  transition: font-size 0.3s ease; /* إضافة انتقال ناعم لحجم الخط */
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  max-width: 700px;
+  margin: 0 auto 3rem auto;
+  line-height: 1.8;
+  transition: font-size 0.3s ease, margin-bottom 0.3s ease;
+}
+
+.hero-services {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3.5rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.service-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: rgba(22, 27, 34, 0.5);
+  padding: 1.25rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.service-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  border-color: var(--accent-color-1);
+}
+
+.service-icon {
+  font-size: 1.8rem;
+}
+
+.service-icon.react { color: #61DAFB; }
+.service-icon.flutter { color: #027DFD; }
+.service-icon.backend { color: #F7DF1E; }
+.service-icon.design { color: #A259FF; }
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-family: var(--font-heading);
+  padding: 16px 36px;
+  text-decoration: none;
+  border-radius: 12px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: 2px solid transparent;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+  color: white;
+  background: var(--accent-gradient);
+  background-size: 200% auto;
+}
+
+.btn-primary:hover {
+  background-position: right center;
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(138, 43, 226, 0.3); 
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-4px) scale(1.02);
+  background-color: var(--bg-secondary);
+  border-color: var(--accent-color-1);
+  box-shadow: 0 8px 25px rgba(30, 144, 255, 0.15);
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+/* --- **جديد:** قسم التجاوبية للشاشات الصغيرة --- */
+@media (max-width: 768px) {
+  .home-container {
+    padding: 3rem 1.5rem; /* تقليل المساحة العمودية وزيادة الأفقية قليلاً */
+  }
+
+  .hero-title {
+    font-size: 2.8rem; /* تصغير حجم العنوان الرئيسي بشكل كبير */
+    line-height: 1.2;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem; /* تصغير حجم العنوان الفرعي */
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-services {
+    grid-template-columns: 1fr; /* جعل كل خدمة تأخذ سطراً كاملاً */
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  
+  /* لا حاجة لتغيير service-item لأن الشبكة أصبحت عمودية */
+
+  .hero-buttons {
+    flex-direction: column; /* جعل الأزرار تحت بعضها */
+    align-items: center;    /* **تعديل:** لتوسيط الأزرار داخل الحاوية */
+    width: 100%;            /* اجعل الحاوية تأخذ العرض المتاح بالكامل */
+    gap: 1rem;              /* تقليل المسافة بين الأزرار */
+    /* **تم الحذف:** لم نعد بحاجة لـ max-width أو margin هنا */
+  }
+
+  .btn {
+    width: 100%;            /* **مهم:** اجعل الزر يملأ الحاوية */
+    max-width: 350px;       /* **مهم:** لكن لا يتجاوز هذا العرض أبداً */
+    font-size: 1rem;
+    padding: 16px 24px;
+    box-sizing: border-box; /* ضمان عدم تجاوز الحجم بسبب الـ padding */
+  }
+}
+
+--- END OF FILE ---
+==================================================
+
+--- START OF FILE pages\HomePage\HomePage.jsx ---
+
+// src/pages/HomePage/HomePage.jsx
+import React from 'react';
+import { Link } from 'react-router-dom';
+// **تحديث:** استيراد أيقونات إضافية للخدمات الجديدة وللأزرار
+import { FaReact, FaServer, FaPalette, FaPaperPlane, FaRocket } from 'react-icons/fa';
+import { SiFlutter } from 'react-icons/si';
+import './HomePage.css';
+
+const HomePage = () => {
+  return (
+    <div className="home-container">
+      <div className="hero-section">
+        <h1 className="hero-title">ايمن خالد</h1>
+        
+        {/* **تحديث:** عنوان فرعي جديد يعكس جميع مهاراتك */}
+        <p className="hero-subtitle">
+          مبرمج Full-Stack، أصمم وأبني تجارب ويب وموبايل متكاملة، من تصميم الواجهات (UI/UX) إلى تطوير الخوادم (Backend).
+        </p>
+
+        {/* **تحديث:** إضافة خدمات الباك اند و UI/UX */}
+        <div className="hero-services">
+          <div className="service-item">
+            <FaReact className="service-icon react" />
+            <span>واجهات ويب (React)</span>
+          </div>
+          <div className="service-item">
+            <SiFlutter className="service-icon flutter" />
+            <span>تطبيقات موبايل (Flutter)</span>
+          </div>
+          <div className="service-item">
+            <FaServer className="service-icon backend" />
+            <span>تطوير الباك اند (Backend)</span>
+          </div>
+          <div className="service-item">
+            <FaPalette className="service-icon design" />
+            <span>تصميم واجهات (UI/UX)</span>
+          </div>
+        </div>
+
+        {/* **تحديث:** إضافة أيقونات للأزرار وتحسين الكلاسات */}
+        <div className="hero-buttons">
+          <Link to="/projects" className="btn btn-primary">
+            <FaRocket />
+            <span>شاهد أعمالي</span>
+          </Link>
+          <Link to="/contact" className="btn btn-secondary">
+            <FaPaperPlane />
+            <span>تواصل معي</span>
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default HomePage;
+
+--- END OF FILE ---
+==================================================
+
+--- START OF FILE pages\ProjectDetailPage\ProjectChangelog.jsx ---
+
+// src/pages/ProjectDetailPage/ProjectChangelog.jsx
+import React from 'react';
+import { useOutletContext } from 'react-router-dom'; // (1) استيراد useOutletContext
+import styles from './ProjectDetailPage.module.css';
+import { FaTag } from 'react-icons/fa';
+
+const ProjectChangelog = () => {
+  const { project } = useOutletContext(); // (2) استخدام useOutletContext مباشرة
+
+  // ... باقي الكود يبقى كما هو
+  return (
+    <div className={styles.textContent}>
+      <h2>سجل التحديثات</h2>
+      <div className={styles.changelogContainer}>
+        {project.changelog.map((entry, index) => (
+          <div key={index} className={styles.changelogEntry}>
+            <div className={styles.timelineIcon}>
+              <FaTag />
+            </div>
+            <div className={styles.changelogContent}>
+              <span className={styles.changelogDate}>{entry.date}</span>
+              <h3 className={styles.changelogVersion}>الإصدار {entry.version}</h3>
+              <ul className={styles.changelogChanges}>
+                {entry.changes.map((change, i) => (
+                  <li key={i}>{change}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default ProjectChangelog;
+
+--- END OF FILE ---
+==================================================
+
+--- START OF FILE pages\ProjectDetailPage\ProjectDetailPage.jsx ---
+
+import React, { useEffect } from 'react';
+// (1) تم حذف 'useOutletContext' من هذا السطر لأنه غير مستخدم هنا
+import { useParams, NavLink, Outlet, Link } from 'react-router-dom';
+import { projectsData } from '../../data/projectsData';
+import styles from './ProjectDetailPage.module.css';
+import { FaArrowLeft } from 'react-icons/fa';
+
+/**
+ * ProjectDetailPage - The main layout component for a single project's page.
+ * It fetches the project data based on the URL parameter and provides a layout
+ * with a header, navigation tabs, and a content area for nested routes.
+ */
+const ProjectDetailPage = () => {
+  // Get the projectId from the URL (e.g., "sales-memo")
+  const { projectId } = useParams();
+  
+  // Find the corresponding project data from our centralized data file
+  const project = projectsData[projectId];
+
+  // Effect to scroll to the top of the page when the project or its section changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [projectId]);
+
+  // If the project is not found, display a "not found" message
+  if (!project) {
+    return (
+      <div className={styles.notFound}>
+        <h2>المشروع غير موجود</h2>
+        <p>عفواً، المشروع الذي تبحث عنه غير متوفر.</p>
+        <Link to="/projects" className={styles.backLink}>
+          <FaArrowLeft /> العودة إلى قائمة المشاريع
+        </Link>
+      </div>
+    );
+  }
+
+  // Render the project detail page layout
+  return (
+    <div className={styles.projectDetailContainer}>
+      {/* The main header with a background image and title */}
+      <header className={styles.projectHeader}>
+        <img src={project.imageUrl} alt={project.title} className={styles.headerImage} />
+        <div className={styles.headerOverlay}></div>
+        <div className={styles.headerContent}>
+          <Link to="/projects" className={styles.backLink}>
+            <FaArrowLeft /> قائمة المشاريع
+          </Link>
+          <h1 className={styles.projectTitle}>{project.title}</h1>
+        </div>
+      </header>
+      
+      {/* Navigation tabs for the different sections of the project */}
+      <nav className={styles.projectNav}>
+        <NavLink 
+          to={`/projects/${projectId}`} 
+          className={({ isActive }) => (isActive ? `${styles.projectNavLink} ${styles.active}` : styles.projectNavLink)} 
+          end // 'end' prop ensures this link is only active on the exact path
+        >
+          نظرة عامة
+        </NavLink>
+        <NavLink 
+          to={`/projects/${projectId}/privacy`} 
+          className={({ isActive }) => (isActive ? `${styles.projectNavLink} ${styles.active}` : styles.projectNavLink)}
+        >
+          سياسة الخصوصية
+        </NavLink>
+        <NavLink 
+          to={`/projects/${projectId}/changelog`} 
+          className={({ isActive }) => (isActive ? `${styles.projectNavLink} ${styles.active}` : styles.projectNavLink)}
+        >
+          سجل التحديثات
+        </NavLink>
+      </nav>
+
+      {/* The main content area where nested routes will be rendered */}
+      <main className={styles.projectContent}>
+        {/* 
+          The <Outlet> component from react-router-dom renders the matched child route component.
+          We pass the 'project' data to the child components via its 'context' prop.
+          Child components (ProjectOverview, ProjectPrivacyPolicy, etc.) can access this data
+          using the 'useOutletContext' hook.
+        */}
+        <Outlet context={{ project }} />
+      </main>
+    </div>
+  );
+};
+
+export default ProjectDetailPage;
+
+--- END OF FILE ---
+==================================================
+
+--- START OF FILE pages\ProjectDetailPage\ProjectDetailPage.module.css ---
+
+/* src/pages/ProjectDetailPage/ProjectDetailPage.module.css */
+
+.projectDetailContainer {
+  padding: 0;
+  padding-bottom: 4rem;
+  max-width: 100%;
+}
+
+.projectHeader {
+  position: relative;
+  width: 100%;
+  height: 40vh;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.headerImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(8px) brightness(0.5);
+  -webkit-filter: blur(8px) brightness(0.5);
+}
+
+.headerOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, var(--bg-primary) 5%, transparent 100%);
+}
+
+.headerContent {
+  position: relative;
+  z-index: 2;
+  color: var(--text-primary);
+  padding: 1rem;
+}
+
+.backLink {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  text-decoration: none;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 8px 16px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.backLink:hover {
+  color: var(--text-primary);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.projectTitle {
+  font-size: 3.5rem;
+  font-weight: 700;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.projectNav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+  margin-bottom: 3rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.projectNavLink {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: 8px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.projectNavLink::after {
+  content: '';
+  position: absolute;
+  bottom: -1rem; /* Aligns with the border-bottom of the parent */
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--accent-gradient);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.projectNavLink.active,
+.projectNavLink:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-secondary);
+}
+
+.projectNavLink.active::after {
+  transform: scaleX(1);
+}
+
+.projectContent {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Overview & Features Styles */
+.overviewContainer h2, .textContent h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.featureCard {
+  background: var(--bg-secondary);
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.featureCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.featureIcon {
+  font-size: 3rem;
+  color: var(--accent-color-1);
+  margin-bottom: 1rem;
+}
+
+.featureTitle {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.featureDescription {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 4rem;
+  flex-wrap: wrap;
+}
+
+.actionButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 14px 28px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.playStore {
+  background-color: #00D37F;
+  color: white;
+}
+.playStore:hover {
+  background-color: #00b86f;
+  transform: translateY(-3px);
+}
+
+.github {
+  background-color: #333;
+  color: white;
+}
+.github:hover {
+  background-color: #444;
+  transform: translateY(-3px);
+}
+
+/* Privacy & Changelog Text Styles */
+.textContent {
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+.textContent h3 {
+  color: var(--text-primary);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+.textContent ul {
+  padding-right: 20px;
+}
+.textContent li {
+  margin-bottom: 0.5rem;
+}
+
+/* Changelog Timeline */
+.changelogContainer {
+  position: relative;
+  padding-right: 30px;
+}
+.changelogContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 8px;
+  height: 100%;
+  width: 2px;
+  background-color: var(--border-color);
+}
+.changelogEntry {
+  position: relative;
+  margin-bottom: 3rem;
+}
+.timelineIcon {
+  position: absolute;
+  top: 5px;
+  right: -12px;
+  width: 30px;
+  height: 30px;
+  background-color: var(--accent-color-2);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--bg-primary);
+}
+.changelogDate {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+.changelogVersion {
+  font-size: 1.6rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+.changelogChanges {
+  list-style-type: disc;
+  padding-right: 20px;
+}
+.changelogChanges li {
+  margin-bottom: 0.5rem;
+}
+
+/* Not Found Page */
+.notFound {
+  text-align: center;
+  padding: 5rem 1rem;
+}
+
+@media (max-width: 768px) {
+  .projectTitle {
+    font-size: 2.5rem;
+  }
+  .backLink {
+    top: 1rem;
+    right: 1rem;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+}
+
+--- END OF FILE ---
+==================================================
+
+--- START OF FILE pages\ProjectDetailPage\ProjectOverview.jsx ---
+
+// src/pages/ProjectDetailPage/ProjectOverview.jsx
+import React from 'react';
+import { useOutletContext } from 'react-router-dom'; // (1) استيراد useOutletContext
+import styles from './ProjectDetailPage.module.css';
+import { FaGithub, FaGooglePlay } from 'react-icons/fa';
+
+const ProjectOverview = () => {
+  const { project } = useOutletContext(); // (2) استخدام useOutletContext مباشرة
+
+  // ... باقي الكود يبقى كما هو
+  return (
+    <div className={styles.overviewContainer}>
+      <h2>مميزات التطبيق</h2>
+      <div className={styles.featuresGrid}>
+        {project.features.map((feature, index) => (
+          <div key={index} className={styles.featureCard}>
+            <div className={styles.featureIcon}>{feature.icon}</div>
+            <h3 className={styles.featureTitle}>{feature.title}</h3>
+            <p className={styles.featureDescription}>{feature.description}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className={styles.actionButtons}>
+        {project.googlePlayUrl && (
+          <a href={project.googlePlayUrl} target="_blank" rel="noopener noreferrer" className={`${styles.actionButton} ${styles.playStore}`}>
+            <FaGooglePlay />
+            <span>متوفر على Google Play</span>
+          </a>
+        )}
+        {project.githubLink && (
+          <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className={`${styles.actionButton} ${styles.github}`}>
+            <FaGithub />
+            <span>عرض الكود على GitHub</span>
+          </a>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default ProjectOverview;
+
+--- END OF FILE ---
+==================================================
+
+--- START OF FILE pages\ProjectDetailPage\ProjectPrivacyPolicy.jsx ---
+
+// src/pages/ProjectDetailPage/ProjectPrivacyPolicy.jsx
+import React from 'react';
+import { useOutletContext } from 'react-router-dom'; // (1) استيراد useOutletContext
+import styles from './ProjectDetailPage.module.css';
+
+const ProjectPrivacyPolicy = () => {
+  const { project } = useOutletContext(); // (2) استخدام useOutletContext مباشرة
+
+  return (
+    <div className={styles.textContent}>
+      <h2>سياسة الخصوصية</h2>
+      <div dangerouslySetInnerHTML={{ __html: project.privacyPolicy }} />
+    </div>
+  );
+};
+
+export default ProjectPrivacyPolicy;
+
+--- END OF FILE ---
+==================================================
+
+--- START OF FILE pages\ProjectsPage\ProjectsPage.css ---
+
+/* src/pages/ProjectsPage/ProjectsPage.css */
+
+.projects-container {
+  padding: 6rem 2rem;
+  text-align: center;
+  min-height: 90vh;
+}
+
+.projects-title {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.projects-subtitle {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto 4rem auto;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.project-card {
+  background: rgba(22, 27, 34, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), 
+              box-shadow 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 16px;
+  border: 2px solid transparent;
+  background: var(--accent-gradient) border-box;
+  
+  /* --- منطقة التحديث --- */
+  -webkit-mask: 
+     linear-gradient(#fff 0 0) padding-box, 
+     linear-gradient(#fff 0 0);
+  /* **جديد:** إضافة النسخة القياسية */
+  mask: 
+     linear-gradient(#fff 0 0) padding-box, 
+     linear-gradient(#fff 0 0);
+  /* --- نهاية منطقة التحديث --- */
+
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+}
+
+/* ... بقية الملف يبقى كما هو ... */
+.project-card:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+.project-image-container {
+  height: 220px;
+  overflow: hidden;
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease-in-out, filter 0.4s ease;
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.1);
+  filter: brightness(1.1);
+}
+
+.project-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  text-align: right;
+}
+
+.project-title {
+  font-size: 1.7rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.project-description {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  flex-grow: 1;
+  margin-bottom: 1.5rem;
+}
+
+.project-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  border-top: 1px solid var(--border-color);
+  padding-top: 1rem;
+}
+
+.tech-stack {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.tech-icon-tooltip {
+  position: relative;
+  font-size: 1.8rem;
+  color: var(--text-secondary);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.tech-icon-tooltip:hover {
+  color: var(--accent-color-1);
+  transform: scale(1.1);
+}
+
+.tech-icon-tooltip .tooltip-text {
+  visibility: hidden;
+  width: max-content;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 10px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 0.9rem;
+}
+
+.tech-icon-tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.project-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 8px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.project-link:hover {
+  background-color: var(--accent-color-1);
+  border-color: var(--accent-color-1);
+  color: white;
+}
+
+
+/* جديد: لجعل البطاقة كلها رابط بدون خط سفلي */
+.project-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block; /* لجعل الرابط يأخذ حجم البطاقة */
+}
+
+/* جديد: تغيير شكل الزر السابق ليناسب السياق الجديد */
+.project-link-imitation {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 8px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.project-card:hover .project-link-imitation {
+  background-color: var(--accent-color-1);
+  border-color: var(--accent-color-1);
+  color: white;
+}
+
+/* حذف رابط GitHub من هنا، سنضعه في صفحة التفاصيل */
+.project-footer {
+  /* حذف justify-content: space-between */
+  justify-content: flex-start; /* أو center حسب التصميم */
+  gap: 2rem; /* مسافة بين التقنيات والزر */
+}
+
+--- END OF FILE ---
+==================================================
+
+--- START OF FILE pages\ProjectsPage\ProjectsPage.jsx ---
+
+// src/pages/ProjectsPage/ProjectsPage.jsx
+import React from 'react';
+import ProjectCard from '../../components/ProjectCard/ProjectCard';
+import './ProjectsPage.css';
+import { projectsData } from '../../data/projectsData'; // <-- استيراد البيانات الجديدة
+
+// تحويل كائن البيانات إلى مصفوفة ليسهل عمل map
+const myProjects = Object.values(projectsData);
+
+const ProjectsPage = () => {
+  return (
+    <div className="projects-container">
+      <h1 className="projects-title">أبرز مشاريعي</h1>
+      <p className="projects-subtitle">
+        مجموعة من المشاريع التي قمت بتطويرها باستخدام Flutter و React، مع التركيز على تجربة المستخدم والأداء.
+      </p>
+      <div className="projects-grid">
+        {myProjects.map((project) => (
+          <ProjectCard
+            key={project.id}
+            id={project.id} // <-- تمرير الـ ID
+            title={project.title}
+            description={project.shortDescription} // <-- استخدام الوصف القصير
+            imageUrl={project.imageUrl}
+            techStack={project.techStack}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default ProjectsPage;
+
+--- END OF FILE ---
+==================================================
+
+--- START OF FILE pages\SkillsPage\SkillsPage.jsx ---
+
+// src/pages/SkillsPage/SkillsPage.jsx
+import React from 'react';
+import styles from './SkillsPage.module.css';
+
+// استيراد الأيقونات التي تحتاجها من المكتبة
+import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaGitAlt } from 'react-icons/fa';
+// **جديد:** استيراد أيقونات Flutter و Dart و JavaScript و Vite
+import { SiJavascript, SiVite, SiFlutter, SiDart } from 'react-icons/si'; 
+
+// تعريف بيانات المهارات في مصفوفة لتسهيل إدارتها
+const skillsData = [
+  { name: 'JavaScript (ES6+)', icon: <SiJavascript /> },
+  { name: 'React', icon: <FaReact /> },
+  { name: 'HTML5', icon: <FaHtml5 /> },
+  { name: 'CSS3', icon: <FaCss3Alt /> },
+  { name: 'Node.js', icon: <FaNodeJs /> },
+  { name: 'Git', icon: <FaGitAlt /> },
+  // { name: 'Vite', icon: <SiVite /> },
+  
+  // **جديد:** إضافة Flutter و Dart هنا
+  { name: 'Flutter', icon: <SiFlutter /> },
+  { name: 'Dart', icon: <SiDart /> },
+  
+  // يمكنك إضافة أي مهارات أخرى هنا بنفس الطريقة
+  // مثال:
+  // { name: 'Firebase', icon: <SiFirebase /> },
+  // { name: 'TypeScript', icon: <SiTypescript /> },
+];
+
+const SkillsPage = () => {
+  return (
+    <div className={styles.skillsContainer}>
+      <h1 className={styles.title}>مهاراتي التقنية</h1>
+      <div className={styles.skillsGrid}>
+        {skillsData.map((skill, index) => (
+          <div key={index} className={styles.skillCard}>
+            <div className={styles.skillIcon}>{skill.icon}</div>
+            <p className={styles.skillName}>{skill.name}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default SkillsPage;
+
+--- END OF FILE ---
+==================================================
+
+--- START OF FILE pages\SkillsPage\SkillsPage.module.css ---
+
+/* src/pages/SkillsPage/SkillsPage.module.css */
+.skillsContainer {
+  padding: 6rem 1rem;
+  text-align: center;
+  /* **جديد:** إضافة منظور للتحريك ثلاثي الأبعاد */
+  perspective: 1500px;
+}
+
+.title {
+  font-size: 2.8rem;
+  margin-bottom: 4rem;
+}
+
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* زيادة الحد الأدنى للعرض */
+  gap: 2.5rem; /* زيادة المسافة */
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* --- **جديد:** إعادة تصميم البطاقة بالكامل --- */
+.skillCard {
+  background: linear-gradient(145deg, var(--bg-secondary), #11151c); /* تدرج لوني خفيف للخلفية */
+  border: 1px solid var(--border-color);
+  border-radius: 16px; /* حواف أكثر دائرية */
+  padding: 2.5rem 1rem;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden; /* مهم لإخفاء تأثير اللمعان الزائد */
+  
+  /* **جديد:** إعداد الانتقال للتأثيرات ثلاثية الأبعاد */
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* **جديد:** التأثير ثلاثي الأبعاد عند مرور الماوس */
+.skillCard:hover {
+  transform: rotateY(15deg) rotateX(10deg) scale(1.05);
+  border-color: var(--accent-color-1);
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3);
+}
+
+/* **جديد:** تأثير اللمعان (Shine Effect) */
+.skillCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%; /* يبدأ من خارج البطاقة */
+  width: 75%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: skewX(-25deg);
+  transition: left 0.7s ease-in-out;
+}
+
+/* **جديد:** تحريك اللمعان عند مرور الماوس */
+.skillCard:hover::before {
+  left: 150%;
+}
+
+/* **جديد:** إعداد الأيقونة للتحريك ثلاثي الأبعاد */
+.skillIcon {
+  font-size: 4.5rem; /* تكبير الأيقونة قليلاً */
+  margin-bottom: 1.5rem;
+  color: var(--text-primary); /* تغيير اللون الأساسي ليكون أهدأ */
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transition: all 0.4s ease;
+  transform: translateZ(0); /* تمهيد للتحريك */
+}
+
+/* **جديد:** تحريك الأيقونة وجعلها ملونة عند مرور الماوس */
+.skillCard:hover .skillIcon {
+  color: var(--accent-color-1);
+  text-shadow: 0 0 20px var(--accent-color-1);
+  transform: translateZ(50px); /* جعل الأيقونة "تقفز" للأمام */
+}
+
+.skillName {
+  font-size: 1.2rem;
+  font-weight: 600;
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+  transition: transform 0.4s ease;
+  transform: translateZ(0); /* تمهيد للتحريك */
+}
+
+/* **جديد:** تحريك اسم المهارة للأمام قليلاً */
+.skillCard:hover .skillName {
+  transform: translateZ(30px);
+}
+
+--- END OF FILE ---
+==================================================
+
+========================================
+End of Extraction
