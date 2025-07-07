@@ -42,7 +42,7 @@ const ContactPage = () => {
       <div className={styles.socialLinks}>
         <p>أو تواصل مباشرة عبر:</p>
         <div className={styles.socialIconsContainer}>
-          <a href="https://github.com/aymanpluss" target="_blank" rel="noopener noreferrer" title="GitHub">
+          <a href="https://github.com/aymanplus" target="_blank" rel="noopener noreferrer" title="GitHub">
             <FaGithub />
           </a>
           <a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer" title="LinkedIn">
