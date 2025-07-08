@@ -9,7 +9,6 @@
   position: relative; /* مهم للخلفية المتدرجة */
 }
 
-/* **جديد:** خلفية متدرجة ناعمة */
 .contactContainer::before {
   content: '';
   position: absolute;
@@ -38,8 +37,6 @@
   line-height: 1.7;
 }
 
-/* --- **جديد:** إعادة تصميم النموذج بالكامل --- */
-
 .contactForm {
   background: rgba(22, 27, 34, 0.5); /* خلفية زجاجية */
   backdrop-filter: blur(10px);
@@ -54,7 +51,6 @@
   text-align: right;
 }
 
-/* **جديد:** حاوية لكل حقل مع أيقونته */
 .inputGroup {
   position: relative;
 }
@@ -68,11 +64,10 @@
   transition: color 0.3s ease;
 }
 
-/* ابحث عن هذه القاعدة في ملفك وقم بتحديثها */
 .contactForm input,
 .contactForm textarea {
   width: 100%;
-  box-sizing: border-box; /* <<-- هذا هو السطر المهم الذي يحل المشكلة */
+  box-sizing: border-box; 
   padding: 16px 50px 16px 16px; 
   border-radius: 10px;
   border: 1px solid var(--border-color);
@@ -83,12 +78,11 @@
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* **جديد:** تأثير التركيز على الحقل والأيقونة */
 .contactForm input:focus,
 .contactForm textarea:focus {
   outline: none;
   border-color: var(--accent-color-1);
-  box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.2); /* توهج حول الحقل */
+  box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.2);
 }
 
 .contactForm input:focus + .icon,
@@ -96,9 +90,7 @@
   color: var(--accent-color-1);
 }
 
-
 .contactForm button {
-  /* تم استخدام الأنماط من الصفحة الرئيسية لتناسق الأزرار */
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -117,10 +109,17 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.contactForm button:hover {
+.contactForm button:hover:not(:disabled) {
   background-position: right center;
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(138, 43, 226, 0.3);
+}
+
+.contactForm button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .contactForm button:active {
@@ -128,8 +127,43 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+/* --- جديد: أنماط رسائل حالة النموذج --- */
+.successMessage {
+  background-color: rgba(30, 215, 96, 0.1);
+  border: 1px solid #1ed760;
+  border-radius: 12px;
+  padding: 2rem;
+  color: #1ed760;
+}
+.successMessage h3 {
+  margin-top: 0;
+  color: white;
+}
+.successMessage p {
+  color: var(--text-secondary);
+}
 
-/* --- **جديد:** تحسين قسم روابط التواصل الاجتماعي --- */
+.errorMessage {
+  background-color: rgba(220, 53, 69, 0.1);
+  border: 1px solid #dc3545;
+  border-radius: 8px;
+  padding: 1rem;
+  color: #ff8a96;
+  text-align: center;
+}
+
+.formNote {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-top: -1rem; /* تقليل المسافة الزائدة */
+}
+.formNote a {
+  color: var(--accent-color-1);
+  font-weight: bold;
+}
+/* --- نهاية الأنماط الجديدة --- */
+
 .socialLinks {
   margin-top: 4rem;
   display: flex;
@@ -148,6 +182,7 @@
   gap: 1.5rem;
 }
 
+/* النمط الأساسي للأيقونات الاجتماعية */
 .socialLinks a {
   font-size: 2rem;
   color: var(--text-secondary);
@@ -162,10 +197,23 @@
   transition: all 0.3s ease;
 }
 
+/* تأثيرات الـ hover المخصصة لكل أيقونة */
 .socialLinks a:hover {
   color: var(--text-primary);
-  border-color: var(--accent-color-1);
-  background-color: var(--accent-color-1);
   transform: translateY(-5px) scale(1.1);
-  box-shadow: 0 8px 25px rgba(30, 144, 255, 0.2);
+}
+.socialLinks a.github:hover {
+  background-color: #333;
+  border-color: #444;
+  box-shadow: 0 8px 25px rgba(51, 51, 51, 0.2);
+}
+.socialLinks a.linkedin:hover {
+  background-color: #0A66C2;
+  border-color: #0A66C2;
+  box-shadow: 0 8px 25px rgba(10, 102, 194, 0.2);
+}
+.socialLinks a.whatsapp:hover {
+  background-color: #25D366;
+  border-color: #25D366;
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.2);
 }

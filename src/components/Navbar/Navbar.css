@@ -1,4 +1,4 @@
-/* src/components/Navbar/Navbar.css (Final Version) */
+/* src/components/Navbar/Navbar.css (Final Corrected Version) */
 
 /* --- أنماط الشاشات الكبيرة (Desktop) --- */
 .navbar {
@@ -12,37 +12,38 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border-color);
-  width: 100%; 
-  max-width: 1280px;
-  margin: 0 auto;
+  width: 100%; /* هذا يسمح للهيدر بأخذ العرض الكامل */
+  
+  /* 
+    هذا الـ padding هو ما يضمن أن المحتوى الداخلي (الشعار والروابط) 
+    لن يلتصق بحواف الشاشة وسيكون متوافقاً مع محتوى الصفحة.
+  */
   padding: 1rem 2rem;
   box-sizing: border-box;
   height: 80px;
+
+  /* === تم حذف الأسطر التالية لأنها كانت سبب المشكلة === */
+  /* max-width: 1280px; (محذوف) */
+  /* margin: 0 auto; (محذوف) */
 }
 
-/* --- **تحديث:** تأثير اللمعان المتحرك على الشعار --- */
+/* --- تأثير اللمعان المتحرك على الشعار --- */
 .nav-logo {
   font-family: var(--font-heading);
   font-size: 1.8rem;
   font-weight: 700;
   text-decoration: none;
-  
-  /* إعداد الخلفية المتدرجة */
   background: linear-gradient(
     90deg, 
     var(--text-secondary), 
     var(--text-primary), 
     var(--text-secondary)
   );
-  background-size: 200% auto; /* جعل الخلفية أعرض من النص */
-  
-  /* قص الخلفية لتظهر فقط داخل حدود النص */
+  background-size: 200% auto;
   color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  
-  /* تطبيق الأنيميشن */
   animation: shine-effect 8s linear infinite;
 }
 
@@ -103,11 +104,8 @@
     height: calc(100vh - 80px);
     position: absolute;
     top: 80px;
-    
-    /* التعديل الرئيسي: إخفاء القائمة إلى اليمين بدل اليسار */
     right: -100%;
-    left: auto; /* مهم لضمان عدم تداخل الخصائص */
-    
+    left: auto;
     opacity: 1;
     transition: all 0.5s ease;
     background: var(--bg-primary);
@@ -115,7 +113,6 @@
   }
 
   .nav-menu.active {
-    /* التعديل الرئيسي: إظهار القائمة من اليمين */
     right: 0; 
     opacity: 1;
     transition: all 0.5s ease;
@@ -143,11 +140,6 @@
 
 /* --- الأنيميشن الخاص بتأثير اللمعان --- */
 @keyframes shine-effect {
-  /*
-    هذا الأنيميشن يحرك موضع الخلفية من اليسار إلى اليمين.
-    يمر اللمعان بسرعة (خلال أول 25% من مدة الأنيميشن) ثم ينتظر
-    بقية الوقت قبل أن يعيد نفسه، مما يجعله غير مزعج.
-  */
   0% {
     background-position: 200% center;
   }

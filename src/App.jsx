@@ -17,8 +17,7 @@ import ProjectOverview from './pages/ProjectDetailPage/ProjectOverview';
 import ProjectPrivacyPolicy from './pages/ProjectDetailPage/ProjectPrivacyPolicy';
 import ProjectChangelog from './pages/ProjectDetailPage/ProjectChangelog';
 
-// 4. (مقترح) إنشاء مكون بسيط لصفحة "غير موجود" للتعامل مع الروابط الخاطئة
-// هذا المكون سيظهر إذا حاول المستخدم الوصول إلى رابط غير معرف في المسارات أدناه
+// 4. مكون صفحة "غير موجود"
 const NotFoundPage = () => (
   <div style={{
     textAlign: 'center',
@@ -54,32 +53,33 @@ const NotFoundPage = () => (
 function App() {
   return (
     <Router>
-      {/* شريط التنقل يظهر في جميع الصفحات */}
+      {/* شريط التنقل يظهر في جميع الصفحات وهو الآن خارج حاوية المحتوى */}
       <Navbar />
       
-      {/* حاوية المسارات التي تبدل بين الصفحات حسب الرابط الحالي */}
-      <Routes>
-        {/* المسارات الأساسية للتطبيق */}
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/skills" element={<SkillsPage />} />
-        <Route path="/projects" element={<ProjectsPage />} />
-        
-        {/* المسار الديناميكي والمتداخل لصفحات المشاريع */}
-        {/* هذا المسار يعرض تفاصيل المشروع بناءً على الـ ID في الرابط (مثال: /projects/my-project-id) */}
-        <Route path="/projects/:projectId" element={<ProjectDetailPage />}>
-          {/* هذه هي الصفحات الفرعية داخل صفحة المشروع */}
-          <Route index element={<ProjectOverview />} /> {/* الصفحة الافتراضية (نظرة عامة) */}
-          <Route path="privacy" element={<ProjectPrivacyPolicy />} /> {/* صفحة سياسة الخصوصية */}
-          <Route path="changelog" element={<ProjectChangelog />} /> {/* صفحة سجل التحديثات */}
-        </Route>
-        
-        <Route path="/contact" element={<ContactPage />} />
+      {/* === التعديل الرئيسي هنا === */}
+      {/* حاوية جديدة للمحتوى الرئيسي لتطبيق المساحات الجانبية والتوسيط */}
+      <main className="main-content">
+        <Routes>
+          {/* المسارات الأساسية للتطبيق */}
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/skills" element={<SkillsPage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          
+          {/* المسار الديناميكي والمتداخل لصفحات المشاريع */}
+          <Route path="/projects/:projectId" element={<ProjectDetailPage />}>
+            <Route index element={<ProjectOverview />} />
+            <Route path="privacy" element={<ProjectPrivacyPolicy />} />
+            <Route path="changelog" element={<ProjectChangelog />} />
+          </Route>
+          
+          <Route path="/contact" element={<ContactPage />} />
 
-        {/* (مهم جداً) مسار شامل للتعامل مع أي رابط غير موجود (صفحة 404) */}
-        {/* يجب أن يكون هذا المسار هو الأخير دائماً في قائمة <Routes> */}
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+          {/* مسار شامل للتعامل مع أي رابط غير موجود (صفحة 404) */}
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </main>
+      {/* === نهاية التعديل الرئيسي === */}
     </Router>
   );
 }
