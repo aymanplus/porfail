@@ -127,7 +127,6 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* --- جديد: أنماط رسائل حالة النموذج --- */
 .successMessage {
   background-color: rgba(30, 215, 96, 0.1);
   border: 1px solid #1ed760;
@@ -156,13 +155,12 @@
   font-size: 0.8rem;
   color: var(--text-secondary);
   text-align: center;
-  margin-top: -1rem; /* تقليل المسافة الزائدة */
+  margin-top: -1rem;
 }
 .formNote a {
   color: var(--accent-color-1);
   font-weight: bold;
 }
-/* --- نهاية الأنماط الجديدة --- */
 
 .socialLinks {
   margin-top: 4rem;
@@ -182,7 +180,6 @@
   gap: 1.5rem;
 }
 
-/* النمط الأساسي للأيقونات الاجتماعية */
 .socialLinks a {
   font-size: 2rem;
   color: var(--text-secondary);
@@ -197,7 +194,6 @@
   transition: all 0.3s ease;
 }
 
-/* تأثيرات الـ hover المخصصة لكل أيقونة */
 .socialLinks a:hover {
   color: var(--text-primary);
   transform: translateY(-5px) scale(1.1);
@@ -216,4 +212,34 @@
   background-color: #25D366;
   border-color: #25D366;
   box-shadow: 0 8px 25px rgba(37, 211, 102, 0.2);
+}
+
+
+/* ================================================= */
+/* === جديد: قسم التجاوبية لشاشات الجوال === */
+/* ================================================= */
+
+@media (max-width: 768px) {
+  .contactContainer {
+    /* تقليل المساحة العمودية والجانبية للحاوية الرئيسية */
+    padding: 4rem 1rem;
+  }
+
+  .title {
+    font-size: 2.2rem;
+  }
+  
+  .subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .contactForm {
+    /* تقليل المساحة الداخلية للبطاقة نفسها لتوسيع الحقول */
+    padding: 2rem 1.5rem;
+  }
+  
+  .socialLinks {
+    margin-top: 3rem;
+  }
 }
