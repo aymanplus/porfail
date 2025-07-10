@@ -1,4 +1,4 @@
-/* src/pages/AboutPage/AboutPage.module.css (النسخة الجديدة والاحترافية) */
+/* src/pages/AboutPage/AboutPage.module.css (النسخة النهائية والاحترافية) */
 
 .aboutPage {
   padding: 5rem 2rem;
@@ -30,11 +30,10 @@
   z-index: 2;
 }
 
-/* تأثير التوهج الناعم خلف الصورة */
 .imageContainer::before {
   content: '';
   position: absolute;
-  inset: -10px; /* توسيع للخارج */
+  inset: -10px;
   border-radius: 50%;
   background: var(--accent-gradient);
   z-index: 1;
@@ -79,9 +78,11 @@
   color: var(--text-primary);
 }
 
+/* === تم التحسين هنا === */
 .cardsContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, 300px);
+  justify-content: center;
   gap: 2rem;
 }
 
@@ -120,7 +121,7 @@
 /* ===== 3. قسم الدعوة لاتخاذ إجراء (CTA) ===== */
 .ctaSection {
   text-align: center;
-  background: rgba(22, 27, 34, 0.5); /* خلفية زجاجية */
+  background: rgba(22, 27, 34, 0.5);
   border: 1px solid var(--border-color);
   padding: 4rem 2rem;
   border-radius: 16px;
@@ -195,7 +196,7 @@
   color: var(--accent-color-2);
 }
 
-/* ===== 4. قسم التجاوبية (النسخة النهائية والمحسنة) ===== */
+/* ===== 4. قسم التجاوبية (Responsive) ===== */
 @media (max-width: 960px) {
   .introSection {
     flex-direction: column;
@@ -230,21 +231,21 @@
     font-size: 2rem;
   }
 
-  /* --- التحسينات الجديدة لبطاقة "هل لديك فكرة مشروع؟" --- */
   .ctaSection {
-    /* تقليل المساحة الداخلية قليلاً لتوفير مساحة */
     padding: 3rem 1.5rem; 
-    margin-bottom: 0; /* لا حاجة لهامش سفلي لأنه آخر عنصر */
+    margin-bottom: 0;
   }
 
+  /* === تم التحسين هنا === */
   .ctaButtons {
-    /* تغيير اتجاه الأزرار إلى عمودي لتكون فوق بعضها */
     flex-direction: column;
-    width: 100%; /* اجعل الحاوية تأخذ العرض الكامل */
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
   }
 
   .ctaButtons .btn {
-    width: 100%; /* اجعل كل زر يأخذ العرض الكامل للبطاقة */
-    max-width: 400px; /* حد أقصى للعرض */
+    width: 100%;
+    max-width: 400px;
   }
 }
