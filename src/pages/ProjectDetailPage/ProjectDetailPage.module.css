@@ -289,3 +289,62 @@
     font-size: 0.9rem;
   }
 }
+
+/* =========================================== */
+/* === تحسينات إضافية للتجاوبية مع الجوال === */
+/* =========================================== */
+@media (max-width: 768px) {
+  .projectTitle {
+    font-size: 2.5rem;
+  }
+  .backLink {
+    top: 1rem;
+    right: 1rem;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+  
+  /* --- جديد: تقليل ارتفاع الهيدر في الجوال --- */
+  .projectHeader {
+    height: 35vh; /* تقليل الارتفاع من 40vh */
+    min-height: 250px; /* تحديد حد أدنى أصغر */
+  }
+
+  /* --- جديد: جعل شريط التنقل الفرعي قابل للتمرير الأفقي --- */
+  .projectNav {
+    /* السماح بالتمرير الأفقي إذا زاد عرض المحتوى عن الحاوية */
+    overflow-x: auto; 
+    /* إخفاء شريط التمرير الافتراضي */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    
+    /* جعل العناصر لا تلتف لسطر جديد */
+    flex-wrap: nowrap; 
+    
+    /* توسيط العناصر في البداية والنهاية بدلاً من توزيعها */
+    justify-content: flex-start;
+    
+    /* إضافة مساحة داخلية لكي لا تلتصق الروابط بالحواف */
+    padding-left: 1rem;
+    padding-right: 1rem;
+    
+    /* تغيير طريقة العرض لتناسب التمرير */
+    -webkit-overflow-scrolling: touch; /* تمرير سلس على iOS */
+  }
+  
+  /* إخفاء شريط التمرير لمتصفحات Webkit (Chrome, Safari) */
+  .projectNav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .projectNavLink {
+    /* منع الروابط من الانكماش */
+    flex-shrink: 0;
+  }
+
+  /* --- جديد: تصغير حجم العناوين داخل المحتوى --- */
+  .overviewContainer h2, .textContent h2 {
+    font-size: 2rem; /* تصغير حجم العنوان "مميزات التطبيق" */
+    margin-bottom: 2rem;
+  }
+}
