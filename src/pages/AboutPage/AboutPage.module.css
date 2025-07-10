@@ -195,7 +195,7 @@
   color: var(--accent-color-2);
 }
 
-/* ===== 4. قسم التجاوبية (Responsive) ===== */
+/* ===== 4. قسم التجاوبية (النسخة النهائية والمحسنة) ===== */
 @media (max-width: 960px) {
   .introSection {
     flex-direction: column;
@@ -222,11 +222,29 @@
     font-size: 2.2rem;
   }
 
-  .principlesSection, .ctaSection {
+  .principlesSection {
     margin-bottom: 4rem;
   }
 
   .sectionTitle, .ctaTitle {
     font-size: 2rem;
+  }
+
+  /* --- التحسينات الجديدة لبطاقة "هل لديك فكرة مشروع؟" --- */
+  .ctaSection {
+    /* تقليل المساحة الداخلية قليلاً لتوفير مساحة */
+    padding: 3rem 1.5rem; 
+    margin-bottom: 0; /* لا حاجة لهامش سفلي لأنه آخر عنصر */
+  }
+
+  .ctaButtons {
+    /* تغيير اتجاه الأزرار إلى عمودي لتكون فوق بعضها */
+    flex-direction: column;
+    width: 100%; /* اجعل الحاوية تأخذ العرض الكامل */
+  }
+
+  .ctaButtons .btn {
+    width: 100%; /* اجعل كل زر يأخذ العرض الكامل للبطاقة */
+    max-width: 400px; /* حد أقصى للعرض */
   }
 }
