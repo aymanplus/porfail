@@ -1,47 +1,21 @@
-/* src/pages/AboutPage/AboutPage.module.css */
-.aboutContainer {
-  padding: 6rem 1rem;
-  min-height: 80vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+/* src/pages/AboutPage/AboutPage.module.css (النسخة الجديدة والاحترافية) */
+
+.aboutPage {
+  padding: 5rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
-.title {
-  font-size: 2.8rem;
-  margin-bottom: 4rem;
-  color: var(--text-primary);
-}
-
-.content {
+/* ===== 1. قسم التقديم (Intro) ===== */
+.introSection {
   display: flex;
   align-items: center;
   gap: 4rem;
-  max-width: 1000px;
+  margin-bottom: 6rem;
 }
 
-.textSection {
-  flex: 1.5;
-}
-
-.textSection h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: var(--text-primary);
-}
-
-.textSection p {
-  font-size: 1.1rem;
-  line-height: 1.8;
-  color: var(--text-secondary);
-  margin-bottom: 1.5rem;
-}
-
-.imageSection {
-  flex: 1;
-  display: flex;
-  justify-content: center;
+.imageContainer {
+  flex-shrink: 0;
   position: relative;
 }
 
@@ -50,63 +24,209 @@
   height: 300px;
   object-fit: cover;
   border-radius: 50%;
-  border: 4px solid var(--border-color);
-  padding: 5px;
-  z-index: 1;
+  border: 5px solid var(--bg-secondary);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 2;
 }
 
-/* تأثير حلقة التدرج حول الصورة */
-.imageSection::before {
+/* تأثير التوهج الناعم خلف الصورة */
+.imageContainer::before {
   content: '';
   position: absolute;
-  width: 318px;
-  height: 318px;
+  inset: -10px; /* توسيع للخارج */
   border-radius: 50%;
   background: var(--accent-gradient);
-  animation: spin 4s linear infinite;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  z-index: 1;
+  filter: blur(15px);
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
-@keyframes spin {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to { transform: translate(-50%, -50%) rotate(360deg); }
+.imageContainer:hover::before {
+  opacity: 0.7;
 }
 
-.cvButton {
-  display: inline-block;
-  font-family: var(--font-heading);
-  padding: 14px 32px;
+.textContainer .mainTitle {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.3;
+  color: var(--text-primary);
+}
+
+.textContainer p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.textContainer p strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* ===== 2. قسم المبادئ (Principles) ===== */
+.principlesSection {
+  text-align: center;
+  margin-bottom: 6rem;
+}
+
+.sectionTitle {
+  font-size: 2.5rem;
+  margin-bottom: 3.5rem;
+  color: var(--text-primary);
+}
+
+.cardsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.principleCard {
+  background: var(--bg-secondary);
+  padding: 2.5rem 2rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.principleCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  border-color: var(--accent-color-1);
+}
+
+.cardIcon {
+  font-size: 2.5rem;
+  color: var(--accent-color-1);
+  margin-bottom: 1.5rem;
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.cardDescription {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+/* ===== 3. قسم الدعوة لاتخاذ إجراء (CTA) ===== */
+.ctaSection {
+  text-align: center;
+  background: rgba(22, 27, 34, 0.5); /* خلفية زجاجية */
+  border: 1px solid var(--border-color);
+  padding: 4rem 2rem;
+  border-radius: 16px;
+}
+
+.ctaTitle {
+  font-size: 2.2rem;
   background: var(--accent-gradient);
-  color: white;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 1rem;
+}
+
+.ctaSubtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 500px;
+  margin: 0 auto 2.5rem auto;
+}
+
+.ctaButtons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 14px 28px;
+  font-size: 1rem;
+  font-weight: 600;
   text-decoration: none;
   border-radius: 8px;
-  font-weight: 600;
   transition: all 0.3s ease;
-  margin-top: 1rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border: 2px solid transparent;
 }
 
-.cvButton:hover {
+.btnPrimary {
+  background: var(--accent-gradient);
+  color: white;
+}
+.btnPrimary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 20px rgba(138, 43, 226, 0.3);
 }
 
+.btnSecondary {
+  background: transparent;
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+.btnSecondary:hover {
+  background: var(--bg-secondary);
+  border-color: var(--accent-color-1);
+  transform: translateY(-3px);
+}
+
+.cvLink {
+  color: var(--text-secondary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.3s ease;
+}
+.cvLink:hover {
+  color: var(--accent-color-2);
+}
+
+/* ===== 4. قسم التجاوبية (Responsive) ===== */
+@media (max-width: 960px) {
+  .introSection {
+    flex-direction: column;
+    text-align: center;
+  }
+}
 
 @media (max-width: 768px) {
-  .content {
-    flex-direction: column-reverse;
+  .aboutPage {
+    padding: 4rem 1rem;
+  }
+  
+  .introSection {
+    gap: 2rem;
+    margin-bottom: 4rem;
   }
 
-  /* --- جديد: تقليل المساحة العمودية في الجوال --- */
-  .aboutContainer {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+  .profileImage {
+    width: 250px;
+    height: 250px;
   }
 
-  .title {
-    font-size: 2.2rem; /* تصغير العنوان الرئيسي قليلاً */
-    margin-bottom: 3rem;
+  .textContainer .mainTitle {
+    font-size: 2.2rem;
+  }
+
+  .principlesSection, .ctaSection {
+    margin-bottom: 4rem;
+  }
+
+  .sectionTitle, .ctaTitle {
+    font-size: 2rem;
   }
 }
