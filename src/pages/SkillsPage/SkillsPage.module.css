@@ -1,4 +1,4 @@
-/* src/pages/SkillsPage/SkillsPage.module.css */
+/* src/pages/SkillsPage/SkillsPage.module.css (النسخة النهائية والاحترافية) */
 .skillsContainer {
   padding: 6rem 1rem;
   text-align: center;
@@ -7,7 +7,42 @@
 
 .title {
   font-size: 2.8rem;
-  margin-bottom: 4rem;
+  margin-bottom: 1rem; /* تقليل المسافة بعد العنوان الرئيسي */
+}
+
+/* --- جديد: نمط للعنوان الفرعي --- */
+.subtitle {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto 5rem auto; /* مسافة كبيرة بعده لبدء أول قسم */
+  line-height: 1.7;
+}
+
+/* --- جديد: نمط لعناوين الفئات --- */
+.categoryTitle {
+  font-size: 2.2rem;
+  margin-top: 5rem; /* مسافة قبل كل قسم جديد */
+  margin-bottom: 2.5rem;
+  color: var(--text-primary);
+  display: inline-block;
+  position: relative;
+}
+
+.categoryTitle::after {
+  content: '';
+  position: absolute;
+  width: 70%;
+  height: 3px;
+  bottom: -10px;
+  left: 15%;
+  background: var(--accent-gradient);
+  border-radius: 2px;
+}
+
+/* --- جديد: حاوية لكل قسم --- */
+.skillsSection:first-of-type .categoryTitle {
+  margin-top: 0; /* القسم الأول لا يحتاج مسافة علوية كبيرة */
 }
 
 .skillsGrid {
@@ -80,47 +115,46 @@
   transform: translateZ(30px);
 }
 
-
 /* ================================================= */
-/* === جديد: قسم التجاوبية لحل مشكلة الجوال === */
+/* === قسم التجاوبية (تم تحديثه) === */
 /* ================================================= */
 
 @media (max-width: 768px) {
   .skillsContainer {
-    padding: 4rem 1.5rem; /* تعديل المسافات لتناسب الجوال */
-    perspective: none; /* إلغاء المنظور لأنه لم يعد ضرورياً */
+    padding: 4rem 1.5rem;
+    perspective: none;
   }
 
   .title {
-    font-size: 2.2rem; /* تصغير العنوان */
-    margin-bottom: 3rem;
+    font-size: 2.2rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 4rem;
+  }
+
+  .categoryTitle {
+    font-size: 1.8rem; /* تصغير عناوين الفئات في الجوال */
+    margin-top: 3rem;
   }
 
   .skillsGrid {
-    gap: 1.5rem; /* تقليل المسافة بين البطاقات */
+    gap: 1.5rem;
   }
-
-  /* 
-    هذا هو الحل الرئيسي للمشكلة:
-    في شاشات الجوال، نلغي تأثير الدوران ثلاثي الأبعاد المعقد
-    ونستبدله بتأثير رفع بسيط لأعلى، وهو آمن ولا يسبب خروج المحتوى.
-  */
+  
   .skillCard:hover {
-    transform: translateY(-8px) scale(1.03); /* تأثير بسيط وآمن للجوال */
+    transform: translateY(-8px) scale(1.03);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
   }
 
-  /* 
-    نلغي أيضاً "قفز" الأيقونة والنص للأمام لأن التأثير ثلاثي الأبعاد لم يعد موجوداً،
-    ونكتفي بتغيير اللون فقط.
-  */
   .skillCard:hover .skillIcon {
-    transform: none; /* إعادة تعيين التحريك */
-    color: var(--accent-color-1); /* الإبقاء على تغيير اللون الجميل */
+    transform: none;
+    color: var(--accent-color-1);
     text-shadow: 0 0 15px var(--accent-color-1);
   }
 
   .skillCard:hover .skillName {
-    transform: none; /* إعادة تعيين التحريك */
+    transform: none;
   }
 }
