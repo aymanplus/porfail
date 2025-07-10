@@ -133,7 +133,10 @@
 
 .featuresGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  /* --- التغيير الرئيسي هنا --- */
+  /* استخدمنا عرضاً ثابتاً (300px) وجعلنا الأعمدة تتوسط الحاوية */
+  grid-template-columns: repeat(auto-fit, 300px);
+  justify-content: center; /* <<< هذا هو السطر الأهم للتوسيط */
   gap: 2rem;
 }
 
