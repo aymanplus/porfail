@@ -21,9 +21,15 @@
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  /* 
+    التغيير الرئيسي هنا: 
+    - استخدمنا عرضاً ثابتاً (360px) بدلاً من 1fr.
+    - أضفنا justify-content: center لتوسيط الأعمدة.
+  */
+  grid-template-columns: repeat(auto-fit, 360px); 
+  justify-content: center; /* <<< هذا السطر هو مفتاح التوسيط */
   gap: 3rem;
-  max-width: 1200px;
+  max-width: 100%; /* اجعله يأخذ العرض الكامل للسماح بالتوسيط */
   margin: 0 auto;
 }
 
@@ -110,8 +116,9 @@
 
 .project-footer {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column; /* <<< تغيير الاتجاه إلى عمودي */
+  align-items: center;   /* <<< توسيط العناصر أفقياً */
+  gap: 1.5rem;           /* <<< إضافة مسافة بين الأيقونات والزر */
   margin-top: auto;
   border-top: 1px solid var(--border-color);
   padding-top: 1rem;

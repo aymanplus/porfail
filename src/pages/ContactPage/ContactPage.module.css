@@ -222,7 +222,7 @@
 @media (max-width: 768px) {
   .contactContainer {
     /* تقليل المساحة العمودية والجانبية للحاوية الرئيسية */
-    padding: 4rem 1rem;
+    padding: 1rem 1rem;
   }
 
   .title {
@@ -240,6 +240,6 @@
   }
   
   .socialLinks {
-    margin-top: 3rem;
+    margin-top: 1rem;
   }
 }

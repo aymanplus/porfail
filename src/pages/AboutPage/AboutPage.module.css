@@ -93,8 +93,20 @@
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
+
 @media (max-width: 768px) {
   .content {
     flex-direction: column-reverse;
+  }
+
+  /* --- جديد: تقليل المساحة العمودية في الجوال --- */
+  .aboutContainer {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .title {
+    font-size: 2.2rem; /* تصغير العنوان الرئيسي قليلاً */
+    margin-bottom: 3rem;
   }
 }
