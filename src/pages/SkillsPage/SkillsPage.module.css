@@ -121,7 +121,7 @@
 
 @media (max-width: 768px) {
   .skillsContainer {
-    padding: 4rem 1.5rem;
+    padding: 4rem 1rem;
     perspective: none;
   }
 
@@ -135,16 +135,37 @@
   }
 
   .categoryTitle {
-    font-size: 1.8rem; /* تصغير عناوين الفئات في الجوال */
+    font-size: 1.8rem;
     margin-top: 3rem;
   }
 
   .skillsGrid {
-    gap: 1.5rem;
+    max-width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem; /* تعديل المسافة لتطابق الصورة */
+  }
+
+  /*
+    ==== التعديل النهائي لمطابقة الصورة ====
+    - تعديل الـ padding لتنسيق البطاقات بشكل أفضل.
+    - تصغير حجم الأيقونة والنص بشكل مناسب لشاشة الجوال.
+  */
+  .skillCard {
+    padding: 2rem 1rem;
+  }
+
+  .skillIcon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .skillName {
+    font-size: 1rem;
+    line-height: 1.3;
   }
   
   .skillCard:hover {
-    transform: translateY(-8px) scale(1.03);
+    transform: translateY(-8px); /* تأثير تحريك أبسط للجوال */
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
   }
 

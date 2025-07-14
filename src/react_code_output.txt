@@ -1,4 +1,4 @@
-React/CSS Code Extraction - 2025-07-10 14:55:46
+React/CSS Code Extraction - 2025-07-14 08:43:59
 ========================================
 
 --- START OF FILE App.css ---
@@ -783,33 +783,87 @@ export const projectsData = {
 
 --- START OF FILE pages\AboutPage\AboutPage.jsx ---
 
-// src/pages/AboutPage/AboutPage.jsx
+// src/pages/AboutPage/AboutPage.jsx (النسخة الجديدة والاحترافية)
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './AboutPage.module.css';
 import myImage from '../../assets/images/aymanpluss.JPG';
 
+// استيراد أيقونات للمبادئ والأزرار
+import { FaLightbulb, FaCode, FaUsers, FaRocket, FaPaperPlane, FaDownload } from 'react-icons/fa';
+
+// بيانات المبادئ لتسهيل إدارتها
+const principles = [
+  {
+    icon: <FaLightbulb />,
+    title: 'حل المشكلات',
+    description: 'أستمتع بتحليل التحديات المعقدة وتحويلها إلى حلول برمجية بسيطة وأنيقة.',
+  },
+  {
+    icon: <FaCode />,
+    title: 'كود نظيف وفعّال',
+    description: 'أؤمن بأهمية كتابة كود منظم وقابل للصيانة، مما يضمن استقرار التطبيقات على المدى الطويل.',
+  },
+  {
+    icon: <FaUsers />,
+    title: 'التركيز على المستخدم',
+    description: 'هدفي الأول هو بناء تجارب استخدام سهلة وممتعة تلبي احتياجات المستخدم وتوقعاته.',
+  },
+];
+
 const AboutPage = () => {
   return (
-    <div className={styles.aboutContainer}>
-      <h1 className={styles.title}>من أنا؟</h1>
-      <div className={styles.content}>
-        <div className={styles.textSection}>
-          {/* تم تغيير العنوان الفرعي هنا */}
-          <h2>مرحباً، أنا ايمن خالد</h2> 
-          <p>
-            مبرمج شغوف متخصص في تطوير التطبيقات، أجد متعة حقيقية في تحويل الأفكار إلى حلول برمجية عملية ومفيدة. بدأت رحلتي في عالم البرمجة من خلال حبي للتصميم وحل المشكلات، ومنذ ذلك الحين وأنا أتعلم وأطور من مهاراتي باستمرار.
-          </p>
-          <p>
-            أركز حالياً على تقنيات الويب الحديثة مثل React لبناء واجهات مستخدم تفاعلية وسريعة. هدفي هو بناء تطبيقات لا تكون فعالة فحسب، بل تقدم أيضاً تجربة استخدام ممتعة وسلسة.
-          </p>
-          <a href="/ayman-cv.pdf" download className={styles.cvButton}>
-            تحميل السيرة الذاتية
-          </a>
-        </div>
-        <div className={styles.imageSection}>
+    <div className={styles.aboutPage}>
+      
+      {/* ===== القسم الأول: التقديم ===== */}
+      <section className={styles.introSection}>
+        <div className={styles.imageContainer}>
           <img src={myImage} alt="صورة شخصية لـ ايمن خالد" className={styles.profileImage} />
         </div>
-      </div>
+        <div className={styles.textContainer}>
+          <h1 className={styles.mainTitle}>مطور تطبيقات بشغف للإبداع</h1>
+          <p>
+            مرحباً، أنا <strong>ايمن خالد</strong>. مبرمج أجد متعة حقيقية في تحويل الأفكار إلى حلول برمجية ملموسة. رحلتي في هذا العالم بدأت من شغفي بالتصميم وحل المشكلات، ومنذ ذلك الحين وأنا في تعلم مستمر لصقل مهاراتي.
+          </p>
+          <p>
+            أركز حالياً على تقنيات الويب والموبايل الحديثة مثل React و Flutter لبناء واجهات تفاعلية وتطبيقات سريعة الأداء.
+          </p>
+        </div>
+      </section>
+
+      {/* ===== القسم الثاني: مبادئي الأساسية ===== */}
+      <section className={styles.principlesSection}>
+        <h2 className={styles.sectionTitle}>منهجيتي في العمل</h2>
+        <div className={styles.cardsContainer}>
+          {principles.map((p, index) => (
+            <div key={index} className={styles.principleCard}>
+              <div className={styles.cardIcon}>{p.icon}</div>
+              <h3 className={styles.cardTitle}>{p.title}</h3>
+              <p className={styles.cardDescription}>{p.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ===== القسم الثالث: الدعوة لاتخاذ إجراء (CTA) ===== */}
+      <section className={styles.ctaSection}>
+        <h2 className={styles.ctaTitle}>هل لديك فكرة مشروع؟</h2>
+        <p className={styles.ctaSubtitle}>
+          دعنا نحولها إلى واقع. أنا مستعد دائماً لمناقشة المشاريع الجديدة والفرص المثيرة.
+        </p>
+        <div className={styles.ctaButtons}>
+          <Link to="/projects" className={`${styles.btn} ${styles.btnPrimary}`}>
+            <FaRocket /> تصفح مشاريعي
+          </Link>
+          <Link to="/contact" className={`${styles.btn} ${styles.btnSecondary}`}>
+            <FaPaperPlane /> تواصل معي
+          </Link>
+        </div>
+        <a href="/ayman-cv.pdf" download className={styles.cvLink}>
+          <FaDownload /> أو قم بتحميل سيرتي الذاتية
+        </a>
+      </section>
+
     </div>
   );
 };
@@ -821,50 +875,24 @@ export default AboutPage;
 
 --- START OF FILE pages\AboutPage\AboutPage.module.css ---
 
-/* src/pages/AboutPage/AboutPage.module.css */
-.aboutContainer {
-  padding: 6rem 1rem;
-  min-height: 80vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+/* src/pages/AboutPage/AboutPage.module.css (النسخة النهائية والاحترافية) */
+
+.aboutPage {
+  padding: 5rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
-.title {
-  font-size: 2.8rem;
-  margin-bottom: 4rem;
-  color: var(--text-primary);
-}
-
-.content {
+/* ===== 1. قسم التقديم (Intro) ===== */
+.introSection {
   display: flex;
   align-items: center;
   gap: 4rem;
-  max-width: 1000px;
+  margin-bottom: 6rem;
 }
 
-.textSection {
-  flex: 1.5;
-}
-
-.textSection h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: var(--text-primary);
-}
-
-.textSection p {
-  font-size: 1.1rem;
-  line-height: 1.8;
-  color: var(--text-secondary);
-  margin-bottom: 1.5rem;
-}
-
-.imageSection {
-  flex: 1;
-  display: flex;
-  justify-content: center;
+.imageContainer {
+  flex-shrink: 0;
   position: relative;
 }
 
@@ -873,52 +901,229 @@ export default AboutPage;
   height: 300px;
   object-fit: cover;
   border-radius: 50%;
-  border: 4px solid var(--border-color);
-  padding: 5px;
-  z-index: 1;
+  border: 5px solid var(--bg-secondary);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 2;
 }
 
-/* تأثير حلقة التدرج حول الصورة */
-.imageSection::before {
+.imageContainer::before {
   content: '';
   position: absolute;
-  width: 318px;
-  height: 318px;
+  inset: -10px;
   border-radius: 50%;
   background: var(--accent-gradient);
-  animation: spin 4s linear infinite;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  z-index: 1;
+  filter: blur(15px);
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
-@keyframes spin {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to { transform: translate(-50%, -50%) rotate(360deg); }
+.imageContainer:hover::before {
+  opacity: 0.7;
 }
 
-.cvButton {
-  display: inline-block;
-  font-family: var(--font-heading);
-  padding: 14px 32px;
+.textContainer .mainTitle {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.3;
+  color: var(--text-primary);
+}
+
+.textContainer p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.textContainer p strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* ===== 2. قسم المبادئ (Principles) ===== */
+.principlesSection {
+  text-align: center;
+  margin-bottom: 6rem;
+}
+
+.sectionTitle {
+  font-size: 2.5rem;
+  margin-bottom: 3.5rem;
+  color: var(--text-primary);
+}
+
+/* === تم التحسين هنا === */
+.cardsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 300px);
+  justify-content: center;
+  gap: 2rem;
+}
+
+.principleCard {
+  background: var(--bg-secondary);
+  padding: 2.5rem 2rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.principleCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  border-color: var(--accent-color-1);
+}
+
+.cardIcon {
+  font-size: 2.5rem;
+  color: var(--accent-color-1);
+  margin-bottom: 1.5rem;
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.cardDescription {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+/* ===== 3. قسم الدعوة لاتخاذ إجراء (CTA) ===== */
+.ctaSection {
+  text-align: center;
+  background: rgba(22, 27, 34, 0.5);
+  border: 1px solid var(--border-color);
+  padding: 4rem 2rem;
+  border-radius: 16px;
+}
+
+.ctaTitle {
+  font-size: 2.2rem;
   background: var(--accent-gradient);
-  color: white;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 1rem;
+}
+
+.ctaSubtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 500px;
+  margin: 0 auto 2.5rem auto;
+}
+
+.ctaButtons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 14px 28px;
+  font-size: 1rem;
+  font-weight: 600;
   text-decoration: none;
   border-radius: 8px;
-  font-weight: 600;
   transition: all 0.3s ease;
-  margin-top: 1rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border: 2px solid transparent;
 }
 
-.cvButton:hover {
+.btnPrimary {
+  background: var(--accent-gradient);
+  color: white;
+}
+.btnPrimary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 20px rgba(138, 43, 226, 0.3);
+}
+
+.btnSecondary {
+  background: transparent;
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+.btnSecondary:hover {
+  background: var(--bg-secondary);
+  border-color: var(--accent-color-1);
+  transform: translateY(-3px);
+}
+
+.cvLink {
+  color: var(--text-secondary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.3s ease;
+}
+.cvLink:hover {
+  color: var(--accent-color-2);
+}
+
+/* ===== 4. قسم التجاوبية (Responsive) ===== */
+@media (max-width: 960px) {
+  .introSection {
+    flex-direction: column;
+    text-align: center;
+  }
 }
 
 @media (max-width: 768px) {
-  .content {
-    flex-direction: column-reverse;
+  .aboutPage {
+    padding: 4rem 1rem;
+  }
+  
+  .introSection {
+    gap: 2rem;
+    margin-bottom: 4rem;
+  }
+
+  .profileImage {
+    width: 250px;
+    height: 250px;
+  }
+
+  .textContainer .mainTitle {
+    font-size: 2.2rem;
+  }
+
+  .principlesSection {
+    margin-bottom: 4rem;
+  }
+
+  .sectionTitle, .ctaTitle {
+    font-size: 2rem;
+  }
+
+  .ctaSection {
+    padding: 3rem 1.5rem; 
+    margin-bottom: 0;
+  }
+
+  /* === تم التحسين هنا === */
+  .ctaButtons {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .ctaButtons .btn {
+    width: 100%;
+    max-width: 400px;
   }
 }
 
@@ -1043,7 +1248,7 @@ export default ContactPage;
 .contactContainer {
   padding: 6rem 1rem;
   text-align: center;
-  max-width: 700px;
+  max-width: 850px; /* <<< قمنا بزيادة العرض الأقصى هنا */
   margin: 0 auto;
   min-height: 80vh;
   position: relative; /* مهم للخلفية المتدرجة */
@@ -1254,15 +1459,18 @@ export default ContactPage;
   box-shadow: 0 8px 25px rgba(37, 211, 102, 0.2);
 }
 
-
 /* ================================================= */
-/* === جديد: قسم التجاوبية لشاشات الجوال === */
+/* === قسم التجاوبية لشاشات الجوال (النسخة الكاملة والمحسنة) === */
 /* ================================================= */
 
 @media (max-width: 768px) {
   .contactContainer {
-    /* تقليل المساحة العمودية والجانبية للحاوية الرئيسية */
-    padding: 4rem 1rem;
+    /* 
+      التحسين الرئيسي (1):
+      تقليل المساحة الجانبية الخارجية بشكل كبير (من 1rem إلى 0.5rem)
+      لجعل بطاقة النموذج تستغل أكبر قدر من عرض الشاشة.
+    */
+    padding: 4rem 0.5rem;
   }
 
   .title {
@@ -1275,15 +1483,18 @@ export default ContactPage;
   }
 
   .contactForm {
-    /* تقليل المساحة الداخلية للبطاقة نفسها لتوسيع الحقول */
-    padding: 2rem 1.5rem;
+    /* 
+      التحسين الرئيسي (2):
+      تقليل المساحة الجانبية الداخلية للبطاقة نفسها (من 1.5rem إلى 1rem)
+      لإعطاء مساحة أكبر لحقول الإدخال لتتمدد.
+    */
+    padding: 2rem 1rem;
   }
   
   .socialLinks {
     margin-top: 3rem;
   }
 }
-
 
 --- END OF FILE ---
 ==================================================
@@ -1442,44 +1653,60 @@ export default ContactPage;
 }
 
 
-/* --- **جديد:** قسم التجاوبية للشاشات الصغيرة --- */
+/* ================================================= */
+/* === قسم التجاوبية للشاشات الصغيرة (النسخة المحسنة) === */
+/* ================================================= */
+
 @media (max-width: 768px) {
   .home-container {
-    padding: 3rem 1.5rem; /* تقليل المساحة العمودية وزيادة الأفقية قليلاً */
+    /* 
+      التحسين (1): 
+      إلغاء الحد الأدنى للارتفاع الكبير.
+      سنجعل ارتفاع الحاوية يعتمد على حجم المحتوى بداخلها فقط،
+      مع إضافة مساحة كافية في الأعلى والأسفل.
+    */
+    min-height: auto; 
+    padding: 6rem 1.5rem; /* زيادة المساحة العلوية والسفلية قليلاً لتعويض إلغاء min-height */
   }
 
   .hero-title {
-    font-size: 2.8rem; /* تصغير حجم العنوان الرئيسي بشكل كبير */
-    line-height: 1.2;
+    /*
+      التحسين (2):
+      تصغير حجم الخط الرئيسي بشكل إضافي،
+      وضبط ارتفاع السطر ليظهر بشكل أفضل إذا انقسم على سطرين.
+    */
+    font-size: 2.5rem; /* تصغير من 2.8rem إلى 2.5rem */
+    line-height: 1.3;  /* تحسين ارتفاع السطر */
   }
 
   .hero-subtitle {
-    font-size: 1.1rem; /* تصغير حجم العنوان الفرعي */
-    margin-bottom: 2.5rem;
+    font-size: 1.1rem;
+    /* 
+      التحسين (3):
+      تقليل المسافة السفلية بعد العنوان الفرعي.
+    */
+    margin-bottom: 2.5rem; 
   }
 
   .hero-services {
-    grid-template-columns: 1fr; /* جعل كل خدمة تأخذ سطراً كاملاً */
+    grid-template-columns: 1fr;
     gap: 1rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem; /* زيادة المسافة قليلاً بعد الخدمات لتمييزها عن الأزرار */
   }
-  
-  /* لا حاجة لتغيير service-item لأن الشبكة أصبحت عمودية */
 
   .hero-buttons {
-    flex-direction: column; /* جعل الأزرار تحت بعضها */
-    align-items: center;    /* **تعديل:** لتوسيط الأزرار داخل الحاوية */
-    width: 100%;            /* اجعل الحاوية تأخذ العرض المتاح بالكامل */
-    gap: 1rem;              /* تقليل المسافة بين الأزرار */
-    /* **تم الحذف:** لم نعد بحاجة لـ max-width أو margin هنا */
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
   }
 
   .btn {
-    width: 100%;            /* **مهم:** اجعل الزر يملأ الحاوية */
-    max-width: 350px;       /* **مهم:** لكن لا يتجاوز هذا العرض أبداً */
+    width: 100%;
+    max-width: 350px;
     font-size: 1rem;
     padding: 16px 24px;
-    box-sizing: border-box; /* ضمان عدم تجاوز الحجم بسبب الـ padding */
+    box-sizing: border-box;
   }
 }
 
@@ -1823,7 +2050,10 @@ export default ProjectDetailPage;
 
 .featuresGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  /* --- التغيير الرئيسي هنا --- */
+  /* استخدمنا عرضاً ثابتاً (300px) وجعلنا الأعمدة تتوسط الحاوية */
+  grid-template-columns: repeat(auto-fit, 300px);
+  justify-content: center; /* <<< هذا هو السطر الأهم للتوسيط */
   gap: 2rem;
 }
 
@@ -1980,6 +2210,65 @@ export default ProjectDetailPage;
   }
 }
 
+/* =========================================== */
+/* === تحسينات إضافية للتجاوبية مع الجوال === */
+/* =========================================== */
+@media (max-width: 768px) {
+  .projectTitle {
+    font-size: 2.5rem;
+  }
+  .backLink {
+    top: 1rem;
+    right: 1rem;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+  
+  /* --- جديد: تقليل ارتفاع الهيدر في الجوال --- */
+  .projectHeader {
+    height: 35vh; /* تقليل الارتفاع من 40vh */
+    min-height: 250px; /* تحديد حد أدنى أصغر */
+  }
+
+  /* --- جديد: جعل شريط التنقل الفرعي قابل للتمرير الأفقي --- */
+  .projectNav {
+    /* السماح بالتمرير الأفقي إذا زاد عرض المحتوى عن الحاوية */
+    overflow-x: auto; 
+    /* إخفاء شريط التمرير الافتراضي */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    
+    /* جعل العناصر لا تلتف لسطر جديد */
+    flex-wrap: nowrap; 
+    
+    /* توسيط العناصر في البداية والنهاية بدلاً من توزيعها */
+    justify-content: flex-start;
+    
+    /* إضافة مساحة داخلية لكي لا تلتصق الروابط بالحواف */
+    padding-left: 1rem;
+    padding-right: 1rem;
+    
+    /* تغيير طريقة العرض لتناسب التمرير */
+    -webkit-overflow-scrolling: touch; /* تمرير سلس على iOS */
+  }
+  
+  /* إخفاء شريط التمرير لمتصفحات Webkit (Chrome, Safari) */
+  .projectNav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .projectNavLink {
+    /* منع الروابط من الانكماش */
+    flex-shrink: 0;
+  }
+
+  /* --- جديد: تصغير حجم العناوين داخل المحتوى --- */
+  .overviewContainer h2, .textContent h2 {
+    font-size: 2rem; /* تصغير حجم العنوان "مميزات التطبيق" */
+    margin-bottom: 2rem;
+  }
+}
+
 --- END OF FILE ---
 ==================================================
 
@@ -2079,9 +2368,15 @@ export default ProjectPrivacyPolicy;
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  /* 
+    التغيير الرئيسي هنا: 
+    - استخدمنا عرضاً ثابتاً (360px) بدلاً من 1fr.
+    - أضفنا justify-content: center لتوسيط الأعمدة.
+  */
+  grid-template-columns: repeat(auto-fit, 360px); 
+  justify-content: center; /* <<< هذا السطر هو مفتاح التوسيط */
   gap: 3rem;
-  max-width: 1200px;
+  max-width: 100%; /* اجعله يأخذ العرض الكامل للسماح بالتوسيط */
   margin: 0 auto;
 }
 
@@ -2168,8 +2463,9 @@ export default ProjectPrivacyPolicy;
 
 .project-footer {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column; /* <<< تغيير الاتجاه إلى عمودي */
+  align-items: center;   /* <<< توسيط العناصر أفقياً */
+  gap: 1.5rem;           /* <<< إضافة مسافة بين الأيقونات والزر */
   margin-top: auto;
   border-top: 1px solid var(--border-color);
   padding-top: 1rem;
@@ -2321,47 +2617,116 @@ export default ProjectsPage;
 
 --- START OF FILE pages\SkillsPage\SkillsPage.jsx ---
 
-// src/pages/SkillsPage/SkillsPage.jsx
+// src/pages/SkillsPage/SkillsPage.jsx (النسخة النهائية والمصححة تماماً)
 import React from 'react';
 import styles from './SkillsPage.module.css';
 
-// استيراد الأيقونات التي تحتاجها من المكتبة
-import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaGitAlt } from 'react-icons/fa';
-// **جديد:** استيراد أيقونات Flutter و Dart و JavaScript و Vite
-import { SiJavascript, SiVite, SiFlutter, SiDart } from 'react-icons/si'; 
+// استيراد جميع الأيقونات المطلوبة
+import { 
+  FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaGitAlt, FaJava, FaPython, 
+  FaSass, FaBootstrap, FaVuejs, FaAndroid, FaApple, FaDatabase
+} from 'react-icons/fa';
 
-// تعريف بيانات المهارات في مصفوفة لتسهيل إدارتها
-const skillsData = [
-  { name: 'JavaScript (ES6+)', icon: <SiJavascript /> },
-  { name: 'React', icon: <FaReact /> },
+import { TbBrandCSharp } from "react-icons/tb";
+import { DiMsqlServer } from "react-icons/di";
+
+import { 
+  SiJavascript, SiVite, SiFlutter, SiDart, SiNextdotjs, SiJquery, 
+  SiDotnet, 
+  SiMysql, SiSqlite, 
+  SiMongodb, SiFirebase, SiRedis, SiElectron, SiWebpack, 
+  SiTailwindcss, SiFigma, SiAdobexd, SiAdobephotoshop, SiAdobeillustrator,
+  SiPython // <<< التغيير هنا: إضافة SiPython المفقودة
+} from 'react-icons/si';
+
+// 1. مهارات الواجهات الأمامية (Frontend)
+const frontendSkills = [
   { name: 'HTML5', icon: <FaHtml5 /> },
   { name: 'CSS3', icon: <FaCss3Alt /> },
+  { name: 'JavaScript (ES6+)', icon: <SiJavascript /> },
+  { name: 'React', icon: <FaReact /> },
+  { name: 'Next.js', icon: <SiNextdotjs /> },
+  { name: 'Vue.js', icon: <FaVuejs /> },
+  { name: 'jQuery', icon: <SiJquery /> },
+  { name: 'Tailwind CSS', icon: <SiTailwindcss /> },
+  { name: 'Sass', icon: <FaSass /> },
+  { name: 'Bootstrap', icon: <FaBootstrap /> },
+];
+
+// 2. مهارات الواجهات الخلفية (Backend)
+const backendSkills = [
   { name: 'Node.js', icon: <FaNodeJs /> },
-  { name: 'Git', icon: <FaGitAlt /> },
-  // { name: 'Vite', icon: <SiVite /> },
-  
-  // **جديد:** إضافة Flutter و Dart هنا
+  { name: 'ASP.NET Core', icon: <SiDotnet /> },
+  { name: 'C#', icon: <TbBrandCSharp /> }, 
+  { name: 'Python', icon: <SiPython /> }, // <-- الآن هذا السطر سيعمل بشكل صحيح
+  { name: 'Java', icon: <FaJava /> },
+];
+
+// ... (باقي الكود يبقى كما هو)
+
+// 3. مهارات تطبيقات الموبايل (Mobile)
+const mobileSkills = [
   { name: 'Flutter', icon: <SiFlutter /> },
   { name: 'Dart', icon: <SiDart /> },
-  
-  // يمكنك إضافة أي مهارات أخرى هنا بنفس الطريقة
-  // مثال:
-  // { name: 'Firebase', icon: <SiFirebase /> },
-  // { name: 'TypeScript', icon: <SiTypescript /> },
+  { name: 'React Native', icon: <FaReact /> },
+  { name: 'Android (Java)', icon: <FaAndroid /> },
+  { name: 'iOS', icon: <FaApple /> },
 ];
+
+// 4. قواعد البيانات (Databases)
+const databaseSkills = [
+  { name: 'SQL Server', icon: <DiMsqlServer /> },
+  { name: 'MySQL', icon: <SiMysql /> },
+  { name: 'SQLite', icon: <SiSqlite /> },
+  { name: 'MongoDB', icon: <SiMongodb /> },
+  { name: 'Firebase', icon: <SiFirebase /> },
+  { name: 'Redis', icon: <FaDatabase /> },
+];
+
+// 5. أدوات التصميم (UI/UX Design)
+const designSkills = [
+  { name: 'Figma', icon: <SiFigma /> },
+  { name: 'Adobe XD', icon: <SiAdobexd /> },
+  { name: 'Photoshop', icon: <SiAdobephotoshop /> },
+  { name: 'Illustrator', icon: <SiAdobeillustrator /> },
+];
+
+// 6. أدوات أخرى (Tools & Others)
+const otherSkills = [
+  { name: 'Git', icon: <FaGitAlt /> },
+  { name: 'Webpack', icon: <SiWebpack /> },
+  { name: 'Electron.js', icon: <SiElectron /> },
+];
+
+// دالة مساعدة لإنشاء قسم المهارات
+const SkillsSection = ({ title, skills }) => (
+  <section className={styles.skillsSection}>
+    <h2 className={styles.categoryTitle}>{title}</h2>
+    <div className={styles.skillsGrid}>
+      {skills.map((skill, index) => (
+        <div key={index} className={styles.skillCard}>
+          <div className={styles.skillIcon}>{skill.icon}</div>
+          <p className={styles.skillName}>{skill.name}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+);
 
 const SkillsPage = () => {
   return (
     <div className={styles.skillsContainer}>
-      <h1 className={styles.title}>مهاراتي التقنية</h1>
-      <div className={styles.skillsGrid}>
-        {skillsData.map((skill, index) => (
-          <div key={index} className={styles.skillCard}>
-            <div className={styles.skillIcon}>{skill.icon}</div>
-            <p className={styles.skillName}>{skill.name}</p>
-          </div>
-        ))}
-      </div>
+      <h1 className={styles.title}>المهارات التقنية</h1>
+      <p className={styles.subtitle}>
+        مجموعة شاملة من التقنيات والأدوات التي أستخدمها لبناء مشاريع قوية ومتكاملة.
+      </p>
+      
+      <SkillsSection title="تطوير الواجهات الأمامية (Frontend)" skills={frontendSkills} />
+      <SkillsSection title="تطوير الواجهات الخلفية (Backend)" skills={backendSkills} />
+      <SkillsSection title="تطبيقات الموبايل (Mobile)" skills={mobileSkills} />
+      <SkillsSection title="قواعد البيانات (Databases)" skills={databaseSkills} />
+      <SkillsSection title="أدوات التصميم (UI/UX Design)" skills={designSkills} />
+      <SkillsSection title="أدوات أخرى" skills={otherSkills} />
     </div>
   );
 };
@@ -2373,7 +2738,7 @@ export default SkillsPage;
 
 --- START OF FILE pages\SkillsPage\SkillsPage.module.css ---
 
-/* src/pages/SkillsPage/SkillsPage.module.css */
+/* src/pages/SkillsPage/SkillsPage.module.css (النسخة النهائية والاحترافية) */
 .skillsContainer {
   padding: 6rem 1rem;
   text-align: center;
@@ -2382,7 +2747,42 @@ export default SkillsPage;
 
 .title {
   font-size: 2.8rem;
-  margin-bottom: 4rem;
+  margin-bottom: 1rem; /* تقليل المسافة بعد العنوان الرئيسي */
+}
+
+/* --- جديد: نمط للعنوان الفرعي --- */
+.subtitle {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto 5rem auto; /* مسافة كبيرة بعده لبدء أول قسم */
+  line-height: 1.7;
+}
+
+/* --- جديد: نمط لعناوين الفئات --- */
+.categoryTitle {
+  font-size: 2.2rem;
+  margin-top: 5rem; /* مسافة قبل كل قسم جديد */
+  margin-bottom: 2.5rem;
+  color: var(--text-primary);
+  display: inline-block;
+  position: relative;
+}
+
+.categoryTitle::after {
+  content: '';
+  position: absolute;
+  width: 70%;
+  height: 3px;
+  bottom: -10px;
+  left: 15%;
+  background: var(--accent-gradient);
+  border-radius: 2px;
+}
+
+/* --- جديد: حاوية لكل قسم --- */
+.skillsSection:first-of-type .categoryTitle {
+  margin-top: 0; /* القسم الأول لا يحتاج مسافة علوية كبيرة */
 }
 
 .skillsGrid {
@@ -2455,48 +2855,47 @@ export default SkillsPage;
   transform: translateZ(30px);
 }
 
-
 /* ================================================= */
-/* === جديد: قسم التجاوبية لحل مشكلة الجوال === */
+/* === قسم التجاوبية (تم تحديثه) === */
 /* ================================================= */
 
 @media (max-width: 768px) {
   .skillsContainer {
-    padding: 4rem 1.5rem; /* تعديل المسافات لتناسب الجوال */
-    perspective: none; /* إلغاء المنظور لأنه لم يعد ضرورياً */
+    padding: 4rem 1.5rem;
+    perspective: none;
   }
 
   .title {
-    font-size: 2.2rem; /* تصغير العنوان */
-    margin-bottom: 3rem;
+    font-size: 2.2rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 4rem;
+  }
+
+  .categoryTitle {
+    font-size: 1.8rem; /* تصغير عناوين الفئات في الجوال */
+    margin-top: 3rem;
   }
 
   .skillsGrid {
-    gap: 1.5rem; /* تقليل المسافة بين البطاقات */
+    gap: 1.5rem;
   }
-
-  /* 
-    هذا هو الحل الرئيسي للمشكلة:
-    في شاشات الجوال، نلغي تأثير الدوران ثلاثي الأبعاد المعقد
-    ونستبدله بتأثير رفع بسيط لأعلى، وهو آمن ولا يسبب خروج المحتوى.
-  */
+  
   .skillCard:hover {
-    transform: translateY(-8px) scale(1.03); /* تأثير بسيط وآمن للجوال */
+    transform: translateY(-8px) scale(1.03);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
   }
 
-  /* 
-    نلغي أيضاً "قفز" الأيقونة والنص للأمام لأن التأثير ثلاثي الأبعاد لم يعد موجوداً،
-    ونكتفي بتغيير اللون فقط.
-  */
   .skillCard:hover .skillIcon {
-    transform: none; /* إعادة تعيين التحريك */
-    color: var(--accent-color-1); /* الإبقاء على تغيير اللون الجميل */
+    transform: none;
+    color: var(--accent-color-1);
     text-shadow: 0 0 15px var(--accent-color-1);
   }
 
   .skillCard:hover .skillName {
-    transform: none; /* إعادة تعيين التحريك */
+    transform: none;
   }
 }
 
