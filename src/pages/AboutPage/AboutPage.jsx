@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import styles from './AboutPage.module.css';
 import myImage from '../../assets/images/aymanpluss.JPG';
 
-// استيراد أيقونات للمبادئ والأزرار
-import { FaLightbulb, FaCode, FaUsers, FaRocket, FaPaperPlane, FaDownload } from 'react-icons/fa';
+// استيراد أيقونات للمبادئ والأزرار (تمت إضافة FaEye)
+import { FaLightbulb, FaCode, FaUsers, FaRocket, FaPaperPlane, FaDownload, FaEye } from 'react-icons/fa';
 
 // بيانات المبادئ لتسهيل إدارتها
 const principles = [
@@ -60,7 +60,7 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* ===== القسم الثالث: الدعوة لاتخاذ إجراء (CTA) ===== */}
+      {/* ===== القسم الثالث: الدعوة لاتخاذ إجراء (CTA) - (تم التعديل هنا) ===== */}
       <section className={styles.ctaSection}>
         <h2 className={styles.ctaTitle}>هل لديك فكرة مشروع؟</h2>
         <p className={styles.ctaSubtitle}>
@@ -73,10 +73,24 @@ const AboutPage = () => {
           <Link to="/contact" className={`${styles.btn} ${styles.btnSecondary}`}>
             <FaPaperPlane /> تواصل معي
           </Link>
+          {/* === الزر الجديد: السيرة الذاتية أونلاين === */}
+          <a 
+            href="https://aymanplus.github.io/cvAyman/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className={`${styles.btn} ${styles.btnSecondary}`}
+          >
+            <FaEye /> السيرة الذاتية أونلاين
+          </a>
+          {/* === تحسين زر تحميل السيرة الذاتية === */}
+          <a 
+            href="/ayman-cv.pdf" 
+            download 
+            className={`${styles.btn} ${styles.btnSecondary}`}
+          >
+            <FaDownload /> تحميل السيرة الذاتية
+          </a>
         </div>
-        <a href="/ayman-cv.pdf" download className={styles.cvLink}>
-          <FaDownload /> أو قم بتحميل سيرتي الذاتية
-        </a>
       </section>
 
     </div>

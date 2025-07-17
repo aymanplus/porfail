@@ -1,4 +1,4 @@
-/* src/pages/AboutPage/AboutPage.module.css (النسخة النهائية والاحترافية) */
+/* src/pages/AboutPage/AboutPage.module.css (النسخة المعدلة) */
 
 .aboutPage {
   padding: 5rem 2rem;
@@ -78,7 +78,6 @@
   color: var(--text-primary);
 }
 
-/* === تم التحسين هنا === */
 .cardsContainer {
   display: grid;
   grid-template-columns: repeat(auto-fit, 300px);
@@ -148,7 +147,7 @@
   justify-content: center;
   gap: 1rem;
   flex-wrap: wrap;
-  margin-bottom: 1.5rem;
+  /* === تم حذف margin-bottom من هنا لأننا لم نعد بحاجته === */
 }
 
 .btn {
@@ -184,17 +183,7 @@
   transform: translateY(-3px);
 }
 
-.cvLink {
-  color: var(--text-secondary);
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: color 0.3s ease;
-}
-.cvLink:hover {
-  color: var(--accent-color-2);
-}
+/* === تم حذف كلاس .cvLink القديم من هنا لأنه لم يعد مستخدماً === */
 
 /* ===== 4. قسم التجاوبية (Responsive) ===== */
 @media (max-width: 960px) {
@@ -236,7 +225,6 @@
     margin-bottom: 0;
   }
 
-  /* === تم التحسين هنا === */
   .ctaButtons {
     flex-direction: column;
     align-items: center;
