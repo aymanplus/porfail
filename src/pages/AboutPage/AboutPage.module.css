@@ -1,4 +1,4 @@
-/* src/pages/AboutPage/AboutPage.module.css (النسخة المعدلة) */
+/* src/pages/AboutPage/AboutPage.module.css (النسخة النهائية والمصححة) */
 
 .aboutPage {
   padding: 5rem 2rem;
@@ -138,21 +138,24 @@
 .ctaSubtitle {
   font-size: 1.1rem;
   color: var(--text-secondary);
-  max-width: 500px;
+  max-width: 600px; /* زيادة بسيطة في العرض للنص */
   margin: 0 auto 2.5rem auto;
 }
 
+/* === التعديل الرئيسي هنا === */
 .ctaButtons {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-  /* === تم حذف margin-bottom من هنا لأننا لم نعد بحاجته === */
+  display: grid;
+  /* إنشاء عمودين بعرض تلقائي بناءً على حجم المحتوى (الأزرار) */
+  grid-template-columns: repeat(2, auto); 
+  justify-content: center; /* توسيط شبكة الأزرار بأكملها */
+  gap: 1.25rem; /* مسافة متساوية بين الأزرار */
 }
+/* ======================== */
 
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center; /* توسيط محتوى الزر (الأيقونة والنص) */
   gap: 0.75rem;
   padding: 14px 28px;
   font-size: 1rem;
@@ -182,8 +185,6 @@
   border-color: var(--accent-color-1);
   transform: translateY(-3px);
 }
-
-/* === تم حذف كلاس .cvLink القديم من هنا لأنه لم يعد مستخدماً === */
 
 /* ===== 4. قسم التجاوبية (Responsive) ===== */
 @media (max-width: 960px) {
@@ -225,15 +226,17 @@
     margin-bottom: 0;
   }
 
+  /* === تعديل قسم الأزرار في الجوال === */
   .ctaButtons {
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+    /* تغيير تخطيط الشبكة إلى عمود واحد فقط */
+    grid-template-columns: 1fr;
     gap: 1rem;
   }
 
+  /* (هذا الكلاس يبقى كما هو ليعمل على كل زر بشكل منفرد) */
   .ctaButtons .btn {
     width: 100%;
     max-width: 400px;
+    margin: 0 auto; /* توسيط الزر داخل خليته في الشبكة */
   }
 }
