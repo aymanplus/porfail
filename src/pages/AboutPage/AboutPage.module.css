@@ -1,4 +1,4 @@
-/* src/pages/AboutPage/AboutPage.module.css (النسخة النهائية والمصححة) */
+/* src/pages/AboutPage/AboutPage.module.css (النسخة النهائية مع بطاقة CTA بعرض كامل للجوال) */
 
 .aboutPage {
   padding: 5rem 2rem;
@@ -138,24 +138,21 @@
 .ctaSubtitle {
   font-size: 1.1rem;
   color: var(--text-secondary);
-  max-width: 600px; /* زيادة بسيطة في العرض للنص */
+  max-width: 600px;
   margin: 0 auto 2.5rem auto;
 }
 
-/* === التعديل الرئيسي هنا === */
 .ctaButtons {
   display: grid;
-  /* إنشاء عمودين بعرض تلقائي بناءً على حجم المحتوى (الأزرار) */
   grid-template-columns: repeat(2, auto); 
-  justify-content: center; /* توسيط شبكة الأزرار بأكملها */
-  gap: 1.25rem; /* مسافة متساوية بين الأزرار */
+  justify-content: center;
+  gap: 1.25rem;
 }
-/* ======================== */
 
 .btn {
   display: inline-flex;
   align-items: center;
-  justify-content: center; /* توسيط محتوى الزر (الأيقونة والنص) */
+  justify-content: center;
   gap: 0.75rem;
   padding: 14px 28px;
   font-size: 1rem;
@@ -221,22 +218,32 @@
     font-size: 2rem;
   }
 
+  /* === التعديلات الجديدة هنا لجعل البطاقة بعرض كامل === */
   .ctaSection {
     padding: 3rem 1.5rem; 
     margin-bottom: 0;
-  }
+    
+    /* 1. استخدمنا هوامش سالبة لتعويض الحشو (padding) الخاص بالحاوية الأب */
+    margin-left: -1rem;  /* لتعويض الحشو على يمين الشاشة (في نظام RTL) */
+    margin-right: -1rem; /* لتعويض الحشو على يسار الشاشة (في نظام RTL) */
+    
+    /* 2. ألغينا استدارة الحواف لتبدو البطاقة متصلة بحواف الشاشة */
+    border-radius: 0;
 
-  /* === تعديل قسم الأزرار في الجوال === */
+    /* 3. ألغينا الحدود الجانبية لتكتمل الصورة */
+    border-left: none;
+    border-right: none;
+  }
+  /* ======================================================== */
+
   .ctaButtons {
-    /* تغيير تخطيط الشبكة إلى عمود واحد فقط */
     grid-template-columns: 1fr;
     gap: 1rem;
   }
 
-  /* (هذا الكلاس يبقى كما هو ليعمل على كل زر بشكل منفرد) */
   .ctaButtons .btn {
     width: 100%;
     max-width: 400px;
-    margin: 0 auto; /* توسيط الزر داخل خليته في الشبكة */
+    margin: 0 auto;
   }
 }
