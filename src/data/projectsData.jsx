@@ -16,7 +16,7 @@ export const projectsData = {
     title: "مذكرة مبيعات",
     shortDescription: "تطبيق فلاتر متخصص لأصحاب المحلات والورش لإدارة طلبات العملاء بكفاءة، مع نظام مرن لإضافة أنواع مختلفة من المنتجات وتتبع الحالات المالية والتشغيلية.",
     imageUrl: salesMemoImage,
-    googlePlayUrl: "https://play.google.com/store/apps/details?id=com.aymanpluss.talabati", // ضع رابط متجر جوجل هنا
+    googlePlayUrl: "https://play.google.com/store/apps/details?id=com.aymanplus.talabati", // ضع رابط متجر جوجل هنا
     githubLink: "https://github.com/aymanpluss/talabati",
     techStack: ['Flutter', 'Dart', 'Provider', 'SQFLite', 'Google Mobile Ads'],
     
