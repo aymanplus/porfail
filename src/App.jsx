@@ -2,20 +2,23 @@
 
 // 1. استيراد المكتبات والمكونات الأساسية
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { lazy } from 'react';
 import Navbar from './components/Navbar/Navbar';
+import LazyWrapper from './components/LazyWrapper';
+import ErrorBoundary from './components/ErrorBoundary';
 
-// 2. استيراد جميع مكونات الصفحات
-import HomePage from './pages/HomePage/HomePage';
-import AboutPage from './pages/AboutPage/AboutPage';
-import ProjectsPage from './pages/ProjectsPage/ProjectsPage';
-import ContactPage from './pages/ContactPage/ContactPage';
-import SkillsPage from './pages/SkillsPage/SkillsPage';
-import ProjectDetailPage from './pages/ProjectDetailPage/ProjectDetailPage';
+// 2. استيراد lazy للصفحات لتحسين الأداء
+const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
+const AboutPage = lazy(() => import('./pages/AboutPage/AboutPage'));
+const ProjectsPage = lazy(() => import('./pages/ProjectsPage/ProjectsPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage/ContactPage'));
+const SkillsPage = lazy(() => import('./pages/SkillsPage/SkillsPage'));
+const ProjectDetailPage = lazy(() => import('./pages/ProjectDetailPage/ProjectDetailPage'));
 
 // 3. استيراد المكونات الفرعية (المتداخلة) لصفحة تفاصيل المشروع
-import ProjectOverview from './pages/ProjectDetailPage/ProjectOverview';
-import ProjectPrivacyPolicy from './pages/ProjectDetailPage/ProjectPrivacyPolicy';
-import ProjectChangelog from './pages/ProjectDetailPage/ProjectChangelog';
+const ProjectOverview = lazy(() => import('./pages/ProjectDetailPage/ProjectOverview'));
+const ProjectPrivacyPolicy = lazy(() => import('./pages/ProjectDetailPage/ProjectPrivacyPolicy'));
+const ProjectChangelog = lazy(() => import('./pages/ProjectDetailPage/ProjectChangelog'));
 
 // 4. مكون صفحة "غير موجود"
 const NotFoundPage = () => (
@@ -52,35 +55,37 @@ const NotFoundPage = () => (
 // 5. المكون الرئيسي للتطبيق الذي يجمع كل شيء
 function App() {
   return (
-    <Router>
-      {/* شريط التنقل يظهر في جميع الصفحات وهو الآن خارج حاوية المحتوى */}
-      <Navbar />
-      
-      {/* === التعديل الرئيسي هنا === */}
-      {/* حاوية جديدة للمحتوى الرئيسي لتطبيق المساحات الجانبية والتوسيط */}
-      <main className="main-content">
-        <Routes>
-          {/* المسارات الأساسية للتطبيق */}
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/skills" element={<SkillsPage />} />
-          <Route path="/projects" element={<ProjectsPage />} />
-          
-          {/* المسار الديناميكي والمتداخل لصفحات المشاريع */}
-          <Route path="/projects/:projectId" element={<ProjectDetailPage />}>
-            <Route index element={<ProjectOverview />} />
-            <Route path="privacy" element={<ProjectPrivacyPolicy />} />
-            <Route path="changelog" element={<ProjectChangelog />} />
-          </Route>
-          
-          <Route path="/contact" element={<ContactPage />} />
+    <ErrorBoundary>
+      <Router>
+        {/* شريط التنقل يظهر في جميع الصفحات وهو الآن خارج حاوية المحتوى */}
+        <Navbar />
+        
+        {/* === التعديل الرئيسي هنا === */}
+        {/* حاوية جديدة للمحتوى الرئيسي لتطبيق المساحات الجانبية والتوسيط */}
+        <main className="main-content">
+          <Routes>
+            {/* المسارات الأساسية للتطبيق */}
+            <Route path="/" element={<LazyWrapper><HomePage /></LazyWrapper>} />
+            <Route path="/about" element={<LazyWrapper><AboutPage /></LazyWrapper>} />
+            <Route path="/skills" element={<LazyWrapper><SkillsPage /></LazyWrapper>} />
+            <Route path="/projects" element={<LazyWrapper><ProjectsPage /></LazyWrapper>} />
+            
+            {/* المسار الديناميكي والمتداخل لصفحات المشاريع */}
+            <Route path="/projects/:projectId" element={<LazyWrapper><ProjectDetailPage /></LazyWrapper>}>
+              <Route index element={<LazyWrapper><ProjectOverview /></LazyWrapper>} />
+              <Route path="privacy" element={<LazyWrapper><ProjectPrivacyPolicy /></LazyWrapper>} />
+              <Route path="changelog" element={<LazyWrapper><ProjectChangelog /></LazyWrapper>} />
+            </Route>
+            
+            <Route path="/contact" element={<LazyWrapper><ContactPage /></LazyWrapper>} />
 
-          {/* مسار شامل للتعامل مع أي رابط غير موجود (صفحة 404) */}
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </main>
-      {/* === نهاية التعديل الرئيسي === */}
-    </Router>
+            {/* مسار شامل للتعامل مع أي رابط غير موجود (صفحة 404) */}
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </main>
+        {/* === نهاية التعديل الرئيسي === */}
+      </Router>
+    </ErrorBoundary>
   );
 }
 

@@ -103,3 +103,44 @@ a:hover {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-secondary);
 }
+/* إضافة أنيميشن للـ loading spinner */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* تحسين الخطوط */
+@font-face {
+  font-family: 'Tajawal';
+  font-display: swap;
+  src: url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
+}
+
+/* تحسين الأداء للصور */
+img {
+  loading: lazy;
+  decoding: async;
+}
+
+/* تحسين accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* تحسين focus للوصولية */
+*:focus {
+  outline: 2px solid var(--accent-color-1);
+  outline-offset: 2px;
+}
+
+/* تحسين الاستجابة للأجهزة المحمولة */
+@media (max-width: 768px) {
+  .main-content {
+    padding: 1rem;
+  }
+}
+

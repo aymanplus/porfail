@@ -1,0 +1,12 @@
+nohup: ignoring input
+
+> my-portfolio@0.0.0 dev
+> vite
+
+Port 3000 is in use, trying another one...
+
+  VITE v7.0.0  ready in 358 ms
+
+  ➜  Local:   http://localhost:3001/
+  ➜  Network: http://169.254.0.21:3001/
+7:16:49 AM [vite] (client) hmr update /src/App.jsx
