@@ -17,7 +17,7 @@ export const projectsData = {
     shortDescription: "تطبيق فلاتر متخصص لأصحاب المحلات والورش لإدارة طلبات العملاء بكفاءة، مع نظام مرن لإضافة أنواع مختلفة من المنتجات وتتبع الحالات المالية والتشغيلية.",
     imageUrl: salesMemoImage,
     googlePlayUrl: "https://play.google.com/store/apps/details?id=com.aymanplus.talabati", // ضع رابط متجر جوجل هنا
-    githubLink: "https://github.com/aymanpluss/talabati",
+    githubLink: "https://github.com/aymanplus/talabati",
     techStack: ['Flutter', 'Dart', 'Provider', 'SQFLite', 'Google Mobile Ads'],
     
 
@@ -123,7 +123,7 @@ export const projectsData = {
     shortDescription: "تطبيق فلاتر متكامل لإدارة الديون الشخصية والتجارية، يعمل بشكل كامل بدون الحاجة للاتصال بالإنترنت.",
     imageUrl: debtBookImage,
     googlePlayUrl: null, // لا يوجد رابط بعد
-    githubLink: "https://github.com/aymanpluss/dafter-diwn",
+    githubLink: "https://github.com/aymanplus/dafter-diwn",
     techStack: ['Flutter', 'Dart', 'Provider', 'SQFLite'],
     features: [], // أضف المميزات لاحقاً
     privacyPolicy: "", // أضف السياسة لاحقاً
