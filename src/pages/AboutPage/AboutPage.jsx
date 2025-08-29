@@ -63,7 +63,7 @@ const AboutPage = () => {
           <Button as="a" href="https://aymanplus.github.io/cvAyman/" target="_blank" rel="noopener noreferrer" variant="secondary">
             <FaEye /> السيرة الذاتية أونلاين
           </Button>
-          <Button as="a" href="/ayman-cv.pdf" download variant="secondary">
+          <Button as="a" href="/Ayman_Almehanni_CV.pdf.pdf" download variant="secondary">
             <FaDownload /> تحميل السيرة الذاتية
           </Button>
         </div>
