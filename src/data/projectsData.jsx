@@ -9,8 +9,6 @@ import { FaBoxesPacking, FaShareNodes } from "react-icons/fa6";
 
 // استيراد صور المشاريع
 import salesMemoImage from '../assets/images/talabati.png';
-// استيراد صور المشاريع
-import salesMemoImage from '../assets/images/talabati.png';
 import debtBookImage from '../assets/images/dafter-diwn.png';
 
 export const projectsData = {
