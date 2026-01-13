@@ -1,14 +1,16 @@
 // src/data/projectsData.jsx
 
 // استيراد أيقونات Font Awesome (تم تجميعها وتحديثها)
-import { 
+import {
   FaCashRegister, FaChartLine, FaShieldAlt, FaSync, FaWhatsapp, FaDatabase,
   FaFilePdf, FaCloudUploadAlt, FaUserShield, FaRandom, FaMoneyBillWave, FaUsers
 } from 'react-icons/fa';
 import { FaBoxesPacking, FaShareNodes } from "react-icons/fa6";
 
 // استيراد صور المشاريع
-import salesMemoImage from '../assets/images/talabati.png'; 
+import salesMemoImage from '../assets/images/talabati.png';
+// استيراد صور المشاريع
+import salesMemoImage from '../assets/images/talabati.png';
 import debtBookImage from '../assets/images/dafter-diwn.png';
 
 export const projectsData = {
@@ -172,7 +174,7 @@ export const projectsData = {
       <p>بياناتك محمية داخل مساحة التخزين المعزولة الخاصة بالتطبيق على جهازك. أنت مسؤول عن تأمين جهازك وحفظ ملفات النسخ الاحتياطي المحلية في مكان آمن.</p>
     `,
     changelog: [
-       {
+      {
         version: "1.2.0",
         date: "أغسطس 2025",
         changes: [
